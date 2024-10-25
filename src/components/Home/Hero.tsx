@@ -27,14 +27,14 @@ export default function Hero() {
         </SwiperSlide>
         <SwiperSlide>
           <img
-            src="/public/assets/images/hero2.jpg"
+            src="/assets/images/hero2.jpg"
             alt="Shiny car 2"
             className="h-full w-full object-cover"
           />
         </SwiperSlide>
         <SwiperSlide>
           <img
-            src="/public/assets/images/hero3.jpg"
+            src="/assets/images/hero3.jpg"
             alt="Shiny car 3"
             className="h-full w-full object-cover"
           />
