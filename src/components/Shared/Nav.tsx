@@ -26,13 +26,13 @@ export default function Navbar() {
                 </DisclosureButton>
               </div>
               <div className="flex-1 flex items-center justify-between px-2">
-                <NavLink to="/" className="flex-shrink-0 flex  items-center">
+                <NavLink to="/" className="flex-shrink-0 flex  items-end">
                   <img
                     src="/logo.png"
                     className="h-7 w-7 sm:h-10 sm:w-10 mr-2"
                     alt="Logo"
                   />
-                  <h1 className="logo sm:text-3xl">FITZONE</h1>
+                  <h1 className="logo sm:text-3xl">AutoShine</h1>
                 </NavLink>
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex space-x-4">
@@ -61,7 +61,7 @@ export default function Navbar() {
                       About
                     </NavLink>
                     <NavLink
-                      to="/about"
+                      to="/contact"
                       className="text-white hover:bg-primary-500 px-3 py-2 rounded-md text-sm font-medium"
                     >
                       Contact
