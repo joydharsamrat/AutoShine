@@ -1,0 +1,85 @@
+.scroll {
+  animation: scroll 2000ms infinite;
+}
+
+@keyframes scroll {
+  25% {
+    transform: translateY(10px);
+  }
+
+  50% {
+    transform: translateY(20px);
+  }
+  75% {
+    transform: translateY(30px);
+  }
+  100% {
+    transform: translateY(40px);
+  }
+}
+
+.hidden1 {
+  animation: fade1 2000ms infinite;
+}
+
+@keyframes fade1 {
+  0% {
+    opacity: 0.3;
+  }
+  25% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  75% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.hidden2 {
+  animation: fade2 2000ms infinite;
+}
+
+@keyframes fade2 {
+  0% {
+    opacity: 0.08;
+  }
+  25% {
+    opacity: 0.08;
+  }
+  50% {
+    opacity: 0.08;
+  }
+  75% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.hidden3 {
+  animation: fade3 2000ms infinite;
+}
+
+@keyframes fade3 {
+  0% {
+    opacity: 0.01;
+  }
+  25% {
+    opacity: 0.01;
+  }
+  50% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}

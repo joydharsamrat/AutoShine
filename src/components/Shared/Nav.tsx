@@ -69,7 +69,7 @@ export default function Navbar() {
                   </div>
                 </div>
                 <div>
-                  <Button className="btn-primary">Login</Button>
+                  <Button className="btn-outline-neutral">Login</Button>
                 </div>
               </div>
             </div>
