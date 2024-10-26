@@ -1,69 +1,59 @@
-// Import Swiper and required modules in your FeaturedServices.tsx file
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
-import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import "swiper/css/navigation";
+import { useGetFeaturedServicesQuery } from "../../redux/features/service/service.api";
+import { TService } from "../../types";
 
 export default function FeaturedServices() {
-  const services = [
-    {
-      id: 1,
-      name: "Premium Wash",
-      description:
-        "Get a thorough cleaning for your car with our premium wash service.",
-      image: "/assets/images/hero.webp",
-    },
-    {
-      id: 2,
-      name: "Interior Detailing",
-      description:
-        "Complete detailing of the interior to keep your car fresh and clean.",
-      image: "/assets/images/hero.webp",
-    },
-    {
-      id: 3,
-      name: "Engine Cleaning",
-      description:
-        "Ensure your engine is clean and running efficiently with our service.",
-      image: "/assets/images/hero.webp",
-    },
-    // Add more services as needed
-  ];
+  const { data, isLoading, isError } = useGetFeaturedServicesQuery(undefined);
+
+  if (isLoading) {
+    return <div className="text-center">Loading featured services...</div>;
+  }
+
+  if (isError || !data?.success) {
+    return <div className="text-center">Failed to load featured services.</div>;
+  }
+
+  const featuredServices = data?.data || [];
 
   return (
-    <section className="max-w-7xl mx-auto py-10 px-4">
-      <h2 className="text-3xl font-bold text-center mb-8">Featured Services</h2>
+    <section className="py-12 bg-white">
+      <h2 className="text-3xl font-bold text-center text-primary-700 ">
+        Featured Services
+      </h2>
       <Swiper
-        modules={[Navigation, Pagination, Autoplay]}
-        spaceBetween={20}
-        slidesPerView={1}
+        modules={[Autoplay, Pagination, Navigation]}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
         loop={true}
-        autoplay={{ delay: 3000, disableOnInteraction: false }}
-        pagination={{ clickable: true }}
         breakpoints={{
           640: { slidesPerView: 1 },
           768: { slidesPerView: 2 },
-          1024: { slidesPerView: 3 },
         }}
+        spaceBetween={20}
+        pagination={true}
+        navigation={true}
+        style={{
+          padding: "50px 0", // Adjust this value for horizontal padding
+        }}
+        className="w-full max-w-7xl mx-auto "
       >
-        {services.map((service) => (
-          <SwiperSlide key={service.id}>
-            <div className="bg-white shadow-md rounded-lg overflow-hidden">
-              <img
-                src={service.image}
-                alt={service.name}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-4">
-                <h3 className="text-xl font-semibold">{service.name}</h3>
-                <p className="text-sm text-gray-600 mt-2">
-                  {service.description}
-                </p>
-                <button className="mt-4 bg-primary-500 text-white px-4 py-2 rounded-md hover:bg-primary-700 transition">
-                  Learn More
-                </button>
-              </div>
+        {featuredServices.map((service: TService) => (
+          <SwiperSlide key={service._id}>
+            <div className="flex flex-col items-center justify-center bg-primary-100 rounded-lg shadow-md p-6 text-center ">
+              <h3 className="text-2xl font-semibold text-primary-700 mb-2">
+                {service.name}
+              </h3>
+              <p className="text-neutral-700 mb-4">{service.description}</p>
+              <p className="text-secondary-700 font-bold mb-2">
+                ${service.price} / {service.duration} min
+              </p>
+              <button className="btn-primary">Book Now</button>
             </div>
           </SwiperSlide>
         ))}

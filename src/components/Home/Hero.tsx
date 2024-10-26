@@ -42,7 +42,7 @@ export default function Hero() {
       </Swiper>
 
       {/* Foreground Content */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white bg-black bg-opacity-50 z-10">
+      <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white bg-black bg-opacity-70 z-10">
         <h1 className="text-4xl sm:text-6xl font-bold mb-4">
           Shine Bright with AutoShine!
         </h1>

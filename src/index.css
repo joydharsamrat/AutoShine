@@ -42,3 +42,28 @@
 .logo {
   @apply font-black sm:text-2xl uppercase text-white tracking-[5px];
 }
+
+.swiper-pagination-bullet {
+  --swiper-pagination-bullet-inactive-opacity: 0.3;
+  --swiper-pagination-bullet-inactive-color: #184e77;
+}
+
+.swiper-pagination-bullet-active {
+  --swiper-pagination-color: #184e77;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  --swiper-navigation-size: 20px;
+  --swiper-theme-color: #184e77;
+  --swiper-navigation-sides-offset: -5px;
+  padding: 20px;
+  font-weight: bold;
+  border-radius: 5px;
+  background: white;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  padding: 5px;
+}
