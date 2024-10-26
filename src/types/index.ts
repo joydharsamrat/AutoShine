@@ -7,3 +7,10 @@ export type TService = {
   isDeleted?: boolean;
   featured?: boolean;
 };
+
+export type TUser = {
+  email: string;
+  role: string;
+  iat: number;
+  exp: number;
+};

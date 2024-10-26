@@ -7,19 +7,23 @@ import { Link, useNavigate } from "react-router-dom";
 import "animate.css";
 import { useLoginMutation } from "../redux/features/auth/authApi";
 import toast from "react-hot-toast";
+import { useAppDispatch } from "../redux/features/hooks";
+import { jwtDecode } from "jwt-decode";
+import { setUser } from "../redux/features/auth/authSlice";
 
 const Login = () => {
   const navigate = useNavigate();
   const [userLogin] = useLoginMutation();
+  const dispatch = useAppDispatch();
 
   const onSubmit = async (data: FieldValues) => {
     console.log(data);
     const loadingToast = toast.loading("Logging In...");
 
     try {
-      const token = await userLogin(data).unwrap();
-
-      console.log(token.token);
+      const res = await userLogin(data).unwrap();
+      const user = jwtDecode(res.token);
+      dispatch(setUser({ user, token: res.token }));
       toast.success("Login successful!", { id: loadingToast });
       navigate("/");
     } catch (error: any) {
