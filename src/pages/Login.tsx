@@ -1,13 +1,31 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FieldValues } from "react-hook-form";
 import Form from "../components/form/Form";
 import InputField from "../components/form/InputField";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "animate.css";
+import { useLoginMutation } from "../redux/features/auth/authApi";
+import toast from "react-hot-toast";
 
 const Login = () => {
-  const onSubmit = (data: FieldValues) => {
+  const navigate = useNavigate();
+  const [userLogin] = useLoginMutation();
+
+  const onSubmit = async (data: FieldValues) => {
     console.log(data);
+    const loadingToast = toast.loading("Logging In...");
+
+    try {
+      const token = await userLogin(data).unwrap();
+
+      console.log(token.token);
+      toast.success("Login successful!", { id: loadingToast });
+      navigate("/");
+    } catch (error: any) {
+      console.log(error);
+      toast.error("Login failed. Please try again.", { id: loadingToast });
+    }
   };
 
   return (

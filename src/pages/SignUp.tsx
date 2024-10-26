@@ -1,13 +1,28 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FieldValues } from "react-hook-form";
 import Form from "../components/form/Form";
 import InputField from "../components/form/InputField";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "animate.css";
+import { useSignUpMutation } from "../redux/features/auth/authApi";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
-  const onSubmit = (data: FieldValues) => {
-    console.log(data);
+  const navigate = useNavigate();
+  const [createUser] = useSignUpMutation();
+
+  const onSubmit = async (data: FieldValues) => {
+    const loadingToast = toast.loading("Signing up...");
+
+    try {
+      await createUser(data).unwrap();
+      toast.success("Sign up successful!", { id: loadingToast });
+      navigate("/login");
+    } catch (error: any) {
+      console.log(error);
+      toast.error("Sign up failed. Please try again.", { id: loadingToast });
+    }
   };
 
   return (

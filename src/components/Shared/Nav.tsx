@@ -1,5 +1,4 @@
 import {
-  Button,
   Disclosure,
   DisclosureButton,
   DisclosurePanel,
@@ -69,7 +68,9 @@ export default function Navbar() {
                   </div>
                 </div>
                 <div>
-                  <Button className="btn-outline-neutral">Login</Button>
+                  <NavLink to="/login" className="btn-outline-neutral">
+                    Login
+                  </NavLink>
                 </div>
               </div>
             </div>
