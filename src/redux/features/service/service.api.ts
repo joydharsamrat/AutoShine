@@ -10,7 +10,7 @@ const productApi = baseApi.injectEndpoints({
       }),
     }),
     getAllServices: builder.query({
-      query: ({ searchTerm, sort, page, limit }) => {
+      query: ({ searchTerm, sort }) => {
         const params = new URLSearchParams();
 
         // Add search term
@@ -21,14 +21,6 @@ const productApi = baseApi.injectEndpoints({
         // Add sort order
         if (sort) {
           params.append("sort", sort);
-        }
-
-        // Add pagination
-        if (page) {
-          params.append("page", page.toString());
-        }
-        if (limit) {
-          params.append("limit", limit.toString());
         }
 
         return {
