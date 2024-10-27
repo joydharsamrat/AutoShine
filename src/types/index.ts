@@ -24,3 +24,12 @@ export type TReview = {
   review: string;
   rating: number;
 };
+
+export type TSlot = {
+  _id: string;
+  date: string;
+  startTime: string;
+  endTime: string;
+  isBooked: "available" | "booked" | "cancelled";
+  service: TService;
+};
