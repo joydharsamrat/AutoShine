@@ -1,12 +1,18 @@
 import {
+  Button,
   Disclosure,
   DisclosureButton,
   DisclosurePanel,
 } from "@headlessui/react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../redux/features/hooks";
+import { logout } from "../../redux/features/auth/authSlice";
 
 export default function Navbar() {
+  const token = useAppSelector((state) => state.auth.token);
+  const dispatch = useAppDispatch();
+
   return (
     <Disclosure as="nav" className="bg-primary-700">
       {({ open }) => (
@@ -68,9 +74,18 @@ export default function Navbar() {
                   </div>
                 </div>
                 <div>
-                  <NavLink to="/login" className="btn-outline-neutral">
-                    Login
-                  </NavLink>
+                  {token ? (
+                    <Button
+                      onClick={() => dispatch(logout())}
+                      className="btn-secondary"
+                    >
+                      Logout
+                    </Button>
+                  ) : (
+                    <NavLink to="/login" className="btn-outline-neutral">
+                      Login
+                    </NavLink>
+                  )}
                 </div>
               </div>
             </div>

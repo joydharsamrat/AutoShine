@@ -28,7 +28,12 @@ const Login = () => {
       navigate("/");
     } catch (error: any) {
       console.log(error);
-      toast.error("Login failed. Please try again.", { id: loadingToast });
+      toast.error(
+        `${error?.data?.message}` || "Login failed! Please try again",
+        {
+          id: loadingToast,
+        }
+      );
     }
   };
 

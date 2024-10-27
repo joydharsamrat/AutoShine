@@ -7,14 +7,10 @@ import { useGetFeaturedServicesQuery } from "../../redux/features/service/servic
 import { TService } from "../../types";
 
 export default function FeaturedServices() {
-  const { data, isLoading, isError } = useGetFeaturedServicesQuery(undefined);
+  const { data, isLoading } = useGetFeaturedServicesQuery(undefined);
 
   if (isLoading) {
     return <div className="text-center">Loading featured services...</div>;
-  }
-
-  if (isError || !data?.success) {
-    return <div className="text-center">Failed to load featured services.</div>;
   }
 
   const featuredServices = data?.data || [];
@@ -45,14 +41,17 @@ export default function FeaturedServices() {
       >
         {featuredServices.map((service: TService) => (
           <SwiperSlide key={service._id}>
-            <div className="flex flex-col items-center justify-center bg-primary-100 rounded-lg shadow-md p-6 text-center ">
+            <div className="flex flex-col items-center justify-center bg-neutral-200 rounded-lg shadow-md p-6 text-center ">
               <h3 className="text-2xl font-semibold text-primary-700 mb-2">
                 {service.name}
               </h3>
               <p className="text-neutral-700 mb-4">{service.description}</p>
-              <p className="text-secondary-700 font-bold mb-2">
-                ${service.price} / {service.duration} min
-              </p>
+              <div className="sm:flex mb-2 font-bold gap-5">
+                <p className="text-secondary-700">Price: ${service.price}</p>
+                <p className="text-primary-700">
+                  Duration: {service.duration} min
+                </p>
+              </div>
               <button className="btn-primary">Book Now</button>
             </div>
           </SwiperSlide>
