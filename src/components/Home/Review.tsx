@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaQuoteLeft, FaStar } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
 import { useAppSelector } from "../../redux/features/hooks";
 import { motion } from "framer-motion";
 import "animate.css";
@@ -11,11 +11,10 @@ import {
   useGetAllReviewsQuery,
 } from "../../redux/features/review/review.api";
 import toast from "react-hot-toast";
-import { IoPersonCircleSharp } from "react-icons/io5";
-import { CgFormatSlash } from "react-icons/cg";
-import { TbSlash } from "react-icons/tb";
 import { RxSlash } from "react-icons/rx";
 import { TReview } from "../../types";
+import ReviewCard from "../Review/ReviewCard";
+import ReviewCardSkeleton from "../Shared/Loaders/Skeleton/ReviewSkeleton";
 
 export default function ReviewSection() {
   const [rating, setRating] = useState(0);
@@ -24,7 +23,7 @@ export default function ReviewSection() {
   const userData = useAppSelector((state) => state.auth);
   const navigate = useNavigate();
   const [createReview] = useCreateReviewMutation();
-  const { data } = useGetAllReviewsQuery({ limit: 2 });
+  const { data, isLoading } = useGetAllReviewsQuery({ limit: 2 });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = async () => {
@@ -139,42 +138,13 @@ export default function ReviewSection() {
               <RxSlash /> 5
             </h3>
             <div className="sm:flex sm:gap-5">
-              {data?.data?.map((review: TReview, index: number) => (
-                <motion.div
-                  key={index}
-                  className="bg-neutral-200 p-4 rounded-md shadow-md flex-1 flex flex-col justify-between"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 * index, duration: 0.5 }}
-                >
-                  <div className="flex-1">
-                    <p className="mt-2 text-neutral-700 text-sm ">
-                      <span className="inline-block mr-2 text-5xl opacity-30 animate-pulse">
-                        <FaQuoteLeft />
-                      </span>
-                      {review.review}
-                    </p>
-                  </div>
-                  <div className="flex justify-between items-center mt-2">
-                    <div className="flex items-center gap-2">
-                      <IoPersonCircleSharp className="text-5xl text-primary-700" />
-                      <p className=" text-primary-700 text-sm font-semibold">
-                        {review.user.name}
-                      </p>
-                    </div>
-
-                    <div className="flex items-end gap-1 ">
-                      {Array.from({ length: review.rating }, (_, index) => (
-                        <FaStar
-                          key={index}
-                          size={12}
-                          className="text-secondary-500"
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
+              {isLoading
+                ? Array.from({ length: 2 }).map((_, index) => (
+                    <ReviewCardSkeleton key={index} />
+                  ))
+                : data?.data?.map((review: TReview, index: number) => (
+                    <ReviewCard key={index} review={review} index={index} />
+                  ))}
             </div>
             <motion.button
               onClick={() => navigate("/reviews")}
