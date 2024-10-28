@@ -10,6 +10,7 @@ const InputField = ({
   name: string;
   label: string;
   rules?: object;
+  readonly?: boolean;
 }) => {
   const {
     control,

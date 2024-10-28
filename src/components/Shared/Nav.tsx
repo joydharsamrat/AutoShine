@@ -53,12 +53,7 @@ export default function Navbar() {
                     >
                       Services
                     </NavLink>
-                    <NavLink
-                      to="/booking"
-                      className="text-white hover:bg-primary-500 px-3 py-2 rounded-md text-sm font-medium"
-                    >
-                      Booking
-                    </NavLink>
+
                     <NavLink
                       to="/about"
                       className="text-white hover:bg-primary-500 px-3 py-2 rounded-md text-sm font-medium"
@@ -107,13 +102,7 @@ export default function Navbar() {
               >
                 Services
               </DisclosureButton>
-              <DisclosureButton
-                as={NavLink}
-                to="/booking"
-                className="block text-white hover:bg-primary-500 px-3 py-2 rounded-md text-base font-medium"
-              >
-                Booking
-              </DisclosureButton>
+
               <DisclosureButton
                 as={NavLink}
                 to="/about"

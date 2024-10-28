@@ -13,12 +13,10 @@ const productApi = baseApi.injectEndpoints({
       query: ({ searchTerm, sort }) => {
         const params = new URLSearchParams();
 
-        // Add search term
         if (searchTerm) {
           params.append("searchTerm", searchTerm);
         }
 
-        // Add sort order
         if (sort) {
           params.append("sort", sort);
         }
@@ -45,18 +43,24 @@ const productApi = baseApi.injectEndpoints({
       query: ({ serviceId, date }) => {
         const params = new URLSearchParams();
 
-        // Add search term
         if (serviceId) {
           params.append("serviceId", serviceId);
         }
 
-        // Add sort order
         if (date) {
           params.append("date", date);
         }
 
         return {
           url: `slots?${params.toString()}`,
+          method: "GET",
+        };
+      },
+    }),
+    getSlotById: builder.query({
+      query: (id) => {
+        return {
+          url: `slots/${id}`,
           method: "GET",
         };
       },
@@ -70,4 +74,5 @@ export const {
   useGetServiceByIdQuery,
   useGetFeaturedServicesQuery,
   useGetSlotsForServiceQuery,
+  useGetSlotByIdQuery,
 } = productApi;
