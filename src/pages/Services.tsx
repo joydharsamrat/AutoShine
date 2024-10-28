@@ -3,8 +3,9 @@ import { useGetAllServicesQuery } from "../redux/features/service/service.api";
 import { TService } from "../types";
 import Sort from "../components/Service/Sort";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
 import "animate.css";
+import ServiceCard from "../components/Service/ServiceCard";
+import ServiceCardSkeleton from "../components/Shared/Loaders/Skeleton/ServiceSkeleton";
 
 const ServicesPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -32,20 +33,10 @@ const ServicesPage = () => {
     };
   }, [searchTerm]);
 
-  const navigate = useNavigate();
-
-  if (isLoading) {
-    return (
-      <div className="text-center text-primary-700 animate__animated animate__fadeIn">
-        Loading services...
-      </div>
-    );
-  }
-
   if (isError) {
     console.log(error);
     return (
-      <div className="text-center text-red-500 animate__animated animate__fadeIn">
+      <div className="text-center text-3xl font-semibold min-h screen text-red-500 p-20">
         Error fetching services
       </div>
     );
@@ -77,7 +68,11 @@ const ServicesPage = () => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {!servicesData?.data.length ? (
+        {isLoading ? (
+          Array.from({ length: 6 }).map((_, index) => (
+            <ServiceCardSkeleton key={index} />
+          ))
+        ) : !servicesData?.data.length ? (
           <motion.div
             className="h-screen w-full flex justify-center items-center"
             initial={{ opacity: 0 }}
@@ -90,32 +85,7 @@ const ServicesPage = () => {
           </motion.div>
         ) : (
           servicesData.data.map((service: TService) => (
-            <motion.div
-              key={service._id}
-              className="bg-neutral-200 p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 animate__animated animate__fadeInUp"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 * Math.random(), duration: 0.5 }}
-            >
-              <h2 className="text-xl font-semibold text-primary-700 mb-2">
-                {service.name}
-              </h2>
-              <p className="text-sm text-neutral-700 mb-2">
-                {service.description}
-              </p>
-              <p className="text-lg font-bold text-primary-700">
-                Price: ${service.price}
-              </p>
-              <p className="text-sm text-neutral-500 mb-4">
-                Duration: {service.duration} minutes
-              </p>
-              <button
-                onClick={() => navigate(`/services/${service._id}`)}
-                className="bg-primary-700 text-white px-4 py-2 rounded-md transition-transform duration-300 transform hover:scale-105"
-              >
-                View Details
-              </button>
-            </motion.div>
+            <ServiceCard key={service._id} service={service} />
           ))
         )}
       </div>

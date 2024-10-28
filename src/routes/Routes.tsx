@@ -10,6 +10,9 @@ import SignUp from "../pages/SignUp";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
 import Review from "../pages/Review";
+import Success from "../pages/Success";
+import Failed from "../pages/Failed";
+import AdminDashboard from "../pages/AdminDashboard";
 
 export const router = createBrowserRouter([
   {
@@ -37,6 +40,14 @@ export const router = createBrowserRouter([
         element: <Booking />,
       },
       {
+        path: "/booking/success",
+        element: <Success />,
+      },
+      {
+        path: "/booking/failed",
+        element: <Failed />,
+      },
+      {
         path: "/about",
         element: <About />,
       },
@@ -58,6 +69,11 @@ export const router = createBrowserRouter([
     path: "/login",
     element: <Login />,
   },
+  {
+    path: "/admin",
+    element: <AdminDashboard />,
+  },
+
   {
     path: "*",
     element: <NotFound />,

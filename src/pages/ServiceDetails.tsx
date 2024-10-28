@@ -92,10 +92,16 @@ const ServiceDetailsPage = () => {
             Select a Date
           </h2>
           <Calendar
+            minDate={new Date()}
             value={selectedDate}
-            onChange={setSelectedDate}
+            onChange={(value) => {
+              if (value instanceof Date) {
+                setSelectedDate(value);
+              }
+            }}
             className="bg-neutral-100 p-4 rounded-lg shadow-md"
           />
+          ;
         </div>
 
         <div className="mt-8">

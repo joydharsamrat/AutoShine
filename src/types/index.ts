@@ -33,3 +33,18 @@ export type TSlot = {
   isBooked: "available" | "booked" | "cancelled";
   service: TService;
 };
+
+export type TCustomer = {
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+  role: string;
+};
+
+export type TBooking = {
+  _id: string;
+  customer: TCustomer;
+  service: TService;
+  slot: TSlot;
+};

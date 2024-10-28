@@ -9,7 +9,24 @@ const bookingApi = baseApi.injectEndpoints({
         body: booking,
       }),
     }),
+    initiatePayment: builder.mutation({
+      query: (data) => ({
+        url: "payment",
+        method: "POST",
+        body: data,
+      }),
+    }),
+    getAllBookings: builder.query({
+      query: () => ({
+        url: "bookings",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useCreateBookingMutation } = bookingApi;
+export const {
+  useCreateBookingMutation,
+  useInitiatePaymentMutation,
+  useGetAllBookingsQuery,
+} = bookingApi;

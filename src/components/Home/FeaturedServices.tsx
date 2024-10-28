@@ -5,10 +5,11 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { useGetFeaturedServicesQuery } from "../../redux/features/service/service.api";
 import { TService } from "../../types";
+import { useNavigate } from "react-router-dom";
 
 export default function FeaturedServices() {
   const { data, isLoading } = useGetFeaturedServicesQuery(undefined);
-
+  const navigate = useNavigate();
   if (isLoading) {
     return <div className="text-center">Loading featured services...</div>;
   }
@@ -35,7 +36,7 @@ export default function FeaturedServices() {
         pagination={true}
         navigation={true}
         style={{
-          padding: "50px 0", // Adjust this value for horizontal padding
+          padding: "50px 0",
         }}
         className="w-full max-w-7xl mx-auto "
       >
@@ -52,7 +53,12 @@ export default function FeaturedServices() {
                   Duration: {service.duration} min
                 </p>
               </div>
-              <button className="btn-primary">Book Now</button>
+              <button
+                onClick={() => navigate(`/services/${service._id}`)}
+                className="btn-primary"
+              >
+                Book Now
+              </button>
             </div>
           </SwiperSlide>
         ))}

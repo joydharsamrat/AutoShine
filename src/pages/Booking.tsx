@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useCreateBookingMutation } from "../redux/features/booking/booking.api";
+import {
+  useCreateBookingMutation,
+  useInitiatePaymentMutation,
+} from "../redux/features/booking/booking.api";
 import { useGetSlotByIdQuery } from "../redux/features/service/service.api";
 import Loader from "../components/Shared/Loaders/Loader";
-import { useAppSelector } from "../redux/features/hooks";
 import toast from "react-hot-toast";
 import { FieldValues } from "react-hook-form";
 import Form from "../components/form/Form";
@@ -13,13 +15,13 @@ import BackButton from "../components/Shared/BackButton";
 
 const Booking = () => {
   const { id } = useParams();
-  const userId = useAppSelector((state) => state.auth.user?._id);
   const { data: slotData, isLoading } = useGetSlotByIdQuery(id);
   const [bookSlot] = useCreateBookingMutation();
+  const [initiatePayment] = useInitiatePaymentMutation();
 
   const handleBooking = async (data: FieldValues) => {
     const loadingToast = toast.loading("Booking...");
-    const { userName, userEmail } = data;
+    const { userName, userEmail, userPhone } = data;
 
     if (isBooked !== "available") {
       toast.error("This slot is not available!");
@@ -29,16 +31,24 @@ const Booking = () => {
     const bookingPayload = {
       serviceId: service._id,
       slotId: _id,
-      userName,
-      userEmail,
-      userId,
     };
 
+    const paymentData = {
+      amount: service.price,
+      tran_id: `${_id}${Math.random()}`,
+      cus_name: userName,
+      cus_email: userEmail,
+      cus_phone: userPhone,
+    };
+    console.log(paymentData);
     try {
-      const res = await bookSlot(bookingPayload).unwrap();
-      toast.success("Slot booked successfully", { id: loadingToast });
-      console.log(res);
-      // window.location.href = "https://your-aamarpay-url.com";
+      await bookSlot(bookingPayload).unwrap();
+
+      const res = await initiatePayment(paymentData).unwrap();
+
+      if (res.data.result === "true") {
+        window.location.href = res.data.payment_url;
+      }
     } catch (error: any) {
       toast.error(
         `${error?.data?.message}` || "Booking failed! Please try again",
@@ -68,25 +78,32 @@ const Booking = () => {
           {/* Left Side: Selected Service Details */}
           <div className="w-full md:w-1/2 p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
             <motion.h2
-              className="text-2xl font-semibold text-primary-700 mb-4"
+              className="text-2xl font-semibold text-primary-700"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
             >
               Selected Service
             </motion.h2>
+            <hr className="my-2" />
             {service && (
               <div>
-                <h3 className="text-lg font-bold text-secondary-700">
+                <h3 className="text-xl font-bold text-secondary-700">
                   {service.name}
                 </h3>
                 <p className="text-neutral-600">{service.description}</p>
+                <p className="  font-semibold">Price: ${service.price}</p>
                 {slotData && (
                   <div className="mt-4">
-                    <p className="font-semibold text-primary-600">
+                    <p className="font-semibold text-primary-600 text-secondary-700">
                       Selected Time Slot:
                     </p>
-                    <p className="text-neutral-700">{`${date}: ${startTime} - ${endTime}`}</p>
+                    <p className="text-neutral-700 text-sm">
+                      Date: {`${date}`}
+                    </p>
+                    <p className="text-neutral-700 text-sm">
+                      Time: {`${startTime} - ${endTime}`}
+                    </p>
                   </div>
                 )}
               </div>
@@ -96,13 +113,14 @@ const Booking = () => {
           {/* Right Side: User Information Form */}
           <div className="w-1/2 p-6 ml-4 bg-white rounded-lg shadow-md">
             <motion.h2
-              className="text-2xl font-semibold text-primary-700 mb-4"
+              className="text-2xl font-semibold text-primary-700"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
             >
               User Information
             </motion.h2>
+            <hr className="my-2" />
             <Form onSubmit={handleBooking}>
               <InputField
                 type="text"
@@ -122,6 +140,19 @@ const Booking = () => {
                   },
                 }}
               />
+              <InputField
+                type="tel"
+                name="userPhone"
+                label="Phone Number"
+                rules={{
+                  required: "Phone number is required",
+                  pattern: {
+                    value: /^\d{11}$/,
+                    message: "Invalid phone number. It should be 10 digits.",
+                  },
+                }}
+              />
+
               <div className="mb-2">
                 <label className="block mb-1 text-sm font-semibold ">
                   Time
