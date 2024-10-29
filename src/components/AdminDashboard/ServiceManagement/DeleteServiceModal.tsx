@@ -19,7 +19,7 @@ export default function DeleteServiceModal({
 }: deleteModalProps) {
   const [deleteService] = useDeleteServiceMutation();
   const handleDeleteService = async () => {
-    const loadingToast = toast.loading("loading...");
+    const loadingToast = toast.loading("Deleting service...");
     try {
       await deleteService(id).unwrap();
       toast.success("Service deleted", { id: loadingToast });

@@ -4,7 +4,8 @@ import { TService } from "../../../types";
 import { BiEdit } from "react-icons/bi";
 import { useState } from "react";
 import DeleteServiceModal from "./DeleteServiceModal";
-// import EditServiceModal from "./EditServiceModal";
+import EditServiceModal from "./EditServiceModal";
+import AddServiceModal from "./AddServiceModal";
 
 const ServiceManagement = () => {
   const { data, isLoading } = useGetAllServicesQuery({
@@ -14,18 +15,22 @@ const ServiceManagement = () => {
 
   // State for the delete and edit modals
   const [serviceToDelete, setServiceToDelete] = useState<TService | null>(null);
-  // const [serviceToEdit, setServiceToEdit] = useState<TService | null>(null);
+  const [serviceToEdit, setServiceToEdit] = useState<TService | null>(null);
+  const [addService, setAddService] = useState(false);
 
   const openDeleteModal = (service: TService) => setServiceToDelete(service);
   const closeDeleteModal = () => setServiceToDelete(null);
 
-  // const openEditModal = (service: TService) => setServiceToEdit(service);
-  // const closeEditModal = () => setServiceToEdit(null);
+  const openEditModal = (service: TService) => setServiceToEdit(service);
+  const closeEditModal = () => setServiceToEdit(null);
 
   return (
     <div className="p-4">
       <h2 className="text-xl font-semibold mb-4">Service Management</h2>
-      <button className="bg-primary-700 text-white px-4 py-2 rounded-lg mb-4">
+      <button
+        onClick={() => setAddService(true)}
+        className="bg-primary-700 text-white px-4 py-2 rounded-lg mb-4"
+      >
         Add Service
       </button>
 
@@ -66,7 +71,7 @@ const ServiceManagement = () => {
                     <td className="p-3 flex space-x-4">
                       <button
                         className="text-primary-500"
-                        // onClick={() => openEditModal(service)}
+                        onClick={() => openEditModal(service)}
                       >
                         <BiEdit />
                       </button>
@@ -94,13 +99,19 @@ const ServiceManagement = () => {
       )}
 
       {/* Edit Modal */}
-      {/* {serviceToEdit && (
+      {serviceToEdit && (
         <EditServiceModal
           service={serviceToEdit}
           isOpen={!!serviceToEdit}
           setIsOpen={closeEditModal}
         />
-      )} */}
+      )}
+
+      {/* Add modal */}
+
+      {addService && (
+        <AddServiceModal isOpen={addService} setIsOpen={setAddService} />
+      )}
     </div>
   );
 };

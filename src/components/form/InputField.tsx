@@ -5,12 +5,14 @@ const InputField = ({
   name,
   label,
   rules,
+  defaultValue,
 }: {
   type: string;
   name: string;
   label: string;
   rules?: object;
   readonly?: boolean;
+  defaultValue?: string | number | File;
 }) => {
   const {
     control,
@@ -29,6 +31,7 @@ const InputField = ({
           name={name}
           control={control}
           rules={rules}
+          defaultValue={defaultValue}
           render={({ field }) => (
             <input
               {...field}

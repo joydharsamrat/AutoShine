@@ -3,10 +3,10 @@ import { baseApi } from "../../api/baseApi";
 const productApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     createService: builder.mutation({
-      query: (productData) => ({
+      query: (service) => ({
         url: "services/create-service",
         method: "POST",
-        body: productData,
+        body: service,
       }),
     }),
     getAllServices: builder.query({
@@ -95,5 +95,6 @@ export const {
   useGetFeaturedServicesQuery,
   useGetSlotsForServiceQuery,
   useGetSlotByIdQuery,
+  useUpdateServiceMutation,
   useDeleteServiceMutation,
 } = productApi;
