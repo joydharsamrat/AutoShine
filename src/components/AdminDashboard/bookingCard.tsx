@@ -23,10 +23,10 @@ const BookingCard = ({ booking }: { booking: TBooking }) => {
       </div>
 
       <div className="bg-neutral-50 text-neutral-700 p-4 rounded-md shadow-inner">
-        <p className="text-sm  mb-2">
+        <p className="text-xs  mb-2">
           <strong>Customer:</strong> {booking.customer.name}
         </p>
-        <p className="text-sm ">
+        <p className="text-xs ">
           <strong>Email:</strong> {booking.customer.email}
         </p>
       </div>

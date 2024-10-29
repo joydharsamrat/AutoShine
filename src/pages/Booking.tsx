@@ -5,13 +5,13 @@ import {
   useCreateBookingMutation,
   useInitiatePaymentMutation,
 } from "../redux/features/booking/booking.api";
-import { useGetSlotByIdQuery } from "../redux/features/service/service.api";
 import Loader from "../components/Shared/Loaders/Loader";
 import toast from "react-hot-toast";
 import { FieldValues } from "react-hook-form";
 import Form from "../components/form/Form";
 import InputField from "../components/form/InputField";
 import BackButton from "../components/Shared/BackButton";
+import { useGetSlotByIdQuery } from "../redux/features/slot/slot.api";
 
 const Booking = () => {
   const { id } = useParams();

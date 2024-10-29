@@ -8,7 +8,7 @@ export type TService = {
   featured?: boolean;
 };
 
-export type TUser = {
+export type TUserAuth = {
   _id: string;
   email: string;
   role: string;
@@ -48,3 +48,9 @@ export type TBooking = {
   service: TService;
   slot: TSlot;
 };
+
+export interface TUser extends TUserAuth {
+  address: string;
+  name: string;
+  phone: string;
+}

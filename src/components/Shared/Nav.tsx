@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/features/hooks";
 import { logout } from "../../redux/features/auth/authSlice";
 
 export default function Navbar() {
-  const token = useAppSelector((state) => state.auth.token);
+  const { token, user } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
 
   return (
@@ -53,6 +53,22 @@ export default function Navbar() {
                     >
                       Services
                     </NavLink>
+                    {user?.role === "admin" && (
+                      <NavLink
+                        to="/admin/dashboard"
+                        className="text-white hover:bg-primary-500 px-3 py-2 rounded-md text-sm font-medium"
+                      >
+                        Dashboard
+                      </NavLink>
+                    )}
+                    {user?.role === "user" && (
+                      <NavLink
+                        to="/user/dashboard"
+                        className="text-white hover:bg-primary-500 px-3 py-2 rounded-md text-sm font-medium"
+                      >
+                        Dashboard
+                      </NavLink>
+                    )}
 
                     <NavLink
                       to="/about"

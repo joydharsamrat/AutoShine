@@ -1,11 +1,11 @@
 import { FaTrashAlt } from "react-icons/fa";
-import { useGetAllServicesQuery } from "../../../redux/features/service/service.api";
-import { TService } from "../../../types";
+import { useGetAllServicesQuery } from "../../redux/features/service/service.api";
+import { TService } from "../../types";
 import { BiEdit } from "react-icons/bi";
 import { useState } from "react";
-import DeleteServiceModal from "./DeleteServiceModal";
-import EditServiceModal from "./EditServiceModal";
-import AddServiceModal from "./AddServiceModal";
+import DeleteServiceModal from "../../components/AdminDashboard/ServiceManagement/DeleteServiceModal";
+import EditServiceModal from "../../components/AdminDashboard/ServiceManagement/EditServiceModal";
+import AddServiceModal from "../../components/AdminDashboard/ServiceManagement/AddServiceModal";
 
 const ServiceManagement = () => {
   const { data, isLoading } = useGetAllServicesQuery({
@@ -37,7 +37,7 @@ const ServiceManagement = () => {
       <div className="overflow-x-auto">
         <table className="w-full bg-white shadow-md rounded-lg">
           <thead>
-            <tr className="bg-neutral-200">
+            <tr className="bg-primary-700 text-white ">
               <th className="p-3 text-left whitespace-nowrap">Service Name</th>
               <th className="p-3 text-left whitespace-nowrap">Price</th>
               <th className="p-3 text-left whitespace-nowrap">Duration</th>

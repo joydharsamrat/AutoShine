@@ -12,7 +12,12 @@ import Contact from "../pages/Contact";
 import Review from "../pages/Review";
 import Success from "../pages/Success";
 import Failed from "../pages/Failed";
-import AdminDashboard from "../pages/AdminDashboard";
+import AdminDashboard from "../pages/Admin/AdminDashboard";
+import AdminRoute from "../components/Layouts/AdminRoute";
+import UserManagement from "../pages/Admin/UserManagement";
+import SlotManagement from "../pages/Admin/SlotManagement";
+import ServiceManagement from "../pages/Admin/ServiceManagement";
+import Bookings from "../pages/Admin/Bookings";
 
 export const router = createBrowserRouter([
   {
@@ -60,8 +65,28 @@ export const router = createBrowserRouter([
         element: <Review />,
       },
       {
-        path: "/admin",
-        element: <AdminDashboard />,
+        path: "/admin/dashboard",
+        element: (
+          <AdminRoute>
+            <AdminDashboard />
+          </AdminRoute>
+        ),
+        children: [
+          { index: true, element: <Bookings /> },
+          { path: "bookings", element: <Bookings /> },
+          {
+            path: "services",
+            element: <ServiceManagement />,
+          },
+          {
+            path: "slots",
+            element: <SlotManagement />,
+          },
+          {
+            path: "users",
+            element: <UserManagement />,
+          },
+        ],
       },
     ],
   },

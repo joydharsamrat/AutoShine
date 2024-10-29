@@ -40,32 +40,7 @@ const productApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
-    getSlotsForService: builder.query({
-      query: ({ serviceId, date }) => {
-        const params = new URLSearchParams();
 
-        if (serviceId) {
-          params.append("serviceId", serviceId);
-        }
-
-        if (date) {
-          params.append("date", date);
-        }
-
-        return {
-          url: `slots?${params.toString()}`,
-          method: "GET",
-        };
-      },
-    }),
-    getSlotById: builder.query({
-      query: (id) => {
-        return {
-          url: `slots/${id}`,
-          method: "GET",
-        };
-      },
-    }),
     updateService: builder.mutation({
       query: ({ data, id }) => {
         return {
@@ -85,6 +60,16 @@ const productApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["service"],
     }),
+    createSlots: builder.mutation({
+      query: (data) => {
+        return {
+          url: `services/slots`,
+          method: "POST",
+          body: data,
+        };
+      },
+      invalidatesTags: ["slots"],
+    }),
   }),
 });
 
@@ -93,8 +78,7 @@ export const {
   useGetAllServicesQuery,
   useGetServiceByIdQuery,
   useGetFeaturedServicesQuery,
-  useGetSlotsForServiceQuery,
-  useGetSlotByIdQuery,
   useUpdateServiceMutation,
   useDeleteServiceMutation,
+  useCreateSlotsMutation,
 } = productApi;
