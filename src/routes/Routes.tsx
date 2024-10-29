@@ -59,6 +59,10 @@ export const router = createBrowserRouter([
         path: "/reviews",
         element: <Review />,
       },
+      {
+        path: "/admin",
+        element: <AdminDashboard />,
+      },
     ],
   },
   {
@@ -68,10 +72,6 @@ export const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
-  },
-  {
-    path: "/admin",
-    element: <AdminDashboard />,
   },
 
   {

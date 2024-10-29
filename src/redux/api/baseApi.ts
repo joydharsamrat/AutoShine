@@ -40,6 +40,6 @@ const baseQueryWithLogout: BaseQueryFn<
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: baseQueryWithLogout,
-  tagTypes: ["review"],
+  tagTypes: ["review", "service"],
   endpoints: () => ({}),
 });

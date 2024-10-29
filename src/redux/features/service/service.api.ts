@@ -26,6 +26,7 @@ const productApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
+      providesTags: ["service"],
     }),
     getServiceById: builder.query({
       query: (id) => ({
@@ -65,6 +66,25 @@ const productApi = baseApi.injectEndpoints({
         };
       },
     }),
+    updateService: builder.mutation({
+      query: ({ data, id }) => {
+        return {
+          url: `services/${id}`,
+          method: "PUT",
+          body: data,
+        };
+      },
+      invalidatesTags: ["service"],
+    }),
+    deleteService: builder.mutation({
+      query: (id) => {
+        return {
+          url: `services/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["service"],
+    }),
   }),
 });
 
@@ -75,4 +95,5 @@ export const {
   useGetFeaturedServicesQuery,
   useGetSlotsForServiceQuery,
   useGetSlotByIdQuery,
+  useDeleteServiceMutation,
 } = productApi;

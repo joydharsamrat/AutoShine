@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ServiceManagement from "../components/AdminDashboard/ServiceManagement";
+import ServiceManagement from "../components/AdminDashboard/ServiceManagement/ServiceManagement";
 import SlotManagement from "../components/AdminDashboard/SlotManagement";
 import UserManagement from "../components/AdminDashboard/UserManagement";
 import Bookings from "../components/AdminDashboard/Bookings";
@@ -29,7 +29,7 @@ const AdminDashboard = () => {
       </header>
 
       <div className="flex flex-col md:flex-row">
-        <nav className="w-full md:w-1/4 bg-white shadow-md p-4 sm:min-h-screen">
+        <nav className="w-full md:w-1/4 bg-white shadow-md p-4 md:min-h-screen">
           <ul className="space-y-4">
             <li>
               <button
