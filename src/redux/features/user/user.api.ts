@@ -9,6 +9,13 @@ const userApi = baseApi.injectEndpoints({
       }),
       providesTags: ["users"],
     }),
+    getUserById: builder.query({
+      query: (id) => ({
+        url: `users/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["users"],
+    }),
     makeAdmin: builder.mutation({
       query: (id) => ({
         url: `users/make-admin?id=${id}`,
@@ -16,7 +23,20 @@ const userApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["users"],
     }),
+    updateUserInfo: builder.mutation({
+      query: (data) => ({
+        url: `users`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["users"],
+    }),
   }),
 });
 
-export const { useGetUsersQuery, useMakeAdminMutation } = userApi;
+export const {
+  useGetUsersQuery,
+  useGetUserByIdQuery,
+  useMakeAdminMutation,
+  useUpdateUserInfoMutation,
+} = userApi;

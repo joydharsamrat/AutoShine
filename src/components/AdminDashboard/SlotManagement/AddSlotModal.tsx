@@ -29,7 +29,7 @@ export default function AddSlotModal({ isOpen, setIsOpen }: AddSlotModalProps) {
     const loadingToast = toast.loading("Adding slot...");
     const formattedData = {
       ...data,
-      date: new Date(data.date as string).toISOString().split("T")[0],
+      date: new Date(data.date as string).toLocaleDateString("en-CA"),
     };
     try {
       const res = await createSlots(formattedData).unwrap();
@@ -89,6 +89,7 @@ export default function AddSlotModal({ isOpen, setIsOpen }: AddSlotModalProps) {
                         Date
                       </label>
                       <Calendar
+                        minDate={new Date()}
                         onChange={onChange}
                         value={value || new Date()}
                         className="border rounded-md p-2"

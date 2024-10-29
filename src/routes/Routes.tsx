@@ -18,6 +18,8 @@ import UserManagement from "../pages/Admin/UserManagement";
 import SlotManagement from "../pages/Admin/SlotManagement";
 import ServiceManagement from "../pages/Admin/ServiceManagement";
 import Bookings from "../pages/Admin/Bookings";
+import UserRoute from "../components/Layouts/UserRoute";
+import UserDashboard from "../pages/User/UserDashboard";
 
 export const router = createBrowserRouter([
   {
@@ -87,6 +89,14 @@ export const router = createBrowserRouter([
             element: <UserManagement />,
           },
         ],
+      },
+      {
+        path: "/user/dashboard",
+        element: (
+          <UserRoute>
+            <UserDashboard />
+          </UserRoute>
+        ),
       },
     ],
   },

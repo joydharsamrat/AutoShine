@@ -12,7 +12,6 @@ import { logout } from "../../redux/features/auth/authSlice";
 export default function Navbar() {
   const { token, user } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
-
   return (
     <Disclosure as="nav" className="bg-primary-700">
       {({ open }) => (

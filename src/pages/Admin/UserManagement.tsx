@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   useGetUsersQuery,
   useMakeAdminMutation,
@@ -19,6 +19,11 @@ const UserManagement = () => {
     });
 
   const [makeAdmin] = useMakeAdminMutation();
+
+  useEffect(() => {
+    console.log("Users:", users);
+    console.log("Bookings for selected user:", bookings);
+  }, [users, bookings]);
 
   const handleMakeAdmin = async (id: string) => {
     const loadingToast = toast.loading("Updating role...");
