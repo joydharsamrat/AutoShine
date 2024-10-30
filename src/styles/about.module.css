@@ -1,0 +1,41 @@
+/* Tailwind CSS @apply directive */
+.ourTeam {
+  @apply py-24 max-w-7xl mx-auto;
+}
+
+.swipeSlide {
+  @apply bg-primary-700 max-w-[250px] text-neutral-200 h-auto rounded-[50%_50%_5px_5px];
+}
+.memberImageContainer {
+  @apply rounded-full relative w-[90%] ml-auto mr-auto overflow-hidden bg-neutral-200;
+}
+.memberImageContainer img {
+  @apply rounded-full w-full aspect-square transition-all duration-500 ease-in-out;
+}
+.memberImageContainer .memberLinks {
+  @apply absolute top-0 left-[-100%] w-full h-full flex justify-around items-center bg-black bg-opacity-50 transition-all duration-500 ease-in-out;
+}
+.memberImageContainer .memberLinks a {
+  @apply text-neutral-200 text-2xl hover:scale-105;
+}
+.memberContainer:hover .memberImageContainer img {
+  @apply transform scale-105;
+}
+.memberContainer:hover .memberImageContainer .memberLinks {
+  @apply left-0;
+}
+.memberDetailsContainer {
+  @apply p-2 text-center pointer-events-none;
+}
+.memberName {
+  @apply text-2xl font-bold mb-1;
+}
+.memberPosition {
+  @apply text-lg mb-1;
+}
+.memberDetails {
+  @apply text-xs;
+}
+.sliderPaginationContainer {
+  @apply mt-12 flex justify-center;
+}

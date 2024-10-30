@@ -48,14 +48,7 @@ export default function Footer() {
                   Services
                 </NavLink>
               </li>
-              <li>
-                <NavLink
-                  to="/booking"
-                  className="text-neutral-300 hover:text-secondary-300 transition-colors duration-300"
-                >
-                  Booking
-                </NavLink>
-              </li>
+
               <li>
                 <NavLink
                   to="/about"
