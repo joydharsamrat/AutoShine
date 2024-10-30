@@ -17,8 +17,11 @@ const CountdownTimer = ({
           return <div className="text-green-600 font-semibold">Time's up!</div>;
         } else {
           return (
-            <div className="text-red-600 font-semibold">
-              {days}d {hours}h {minutes}m {seconds}s
+            <div className="text-secondary-700 font-semibold bg-white p-1 rounded-md text-center">
+              {days ? `${days}d ` : ""}
+              {hours || days ? `${hours}h ` : ""}
+              {minutes || hours || days ? `${minutes}m ` : ""}
+              {seconds || minutes || hours || days ? `${seconds}s` : ""}
             </div>
           );
         }

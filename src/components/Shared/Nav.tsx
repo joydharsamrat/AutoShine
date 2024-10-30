@@ -8,10 +8,12 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/features/hooks";
 import { logout } from "../../redux/features/auth/authSlice";
+import { CountdownTimer } from "../UserDashboard/CountdownTimer";
 
 export default function Navbar() {
-  const { token, user } = useAppSelector((state) => state.auth);
+  const { auth, bookings } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
+
   return (
     <Disclosure as="nav" className="bg-primary-700">
       {({ open }) => (
@@ -52,7 +54,7 @@ export default function Navbar() {
                     >
                       Services
                     </NavLink>
-                    {user?.role === "admin" && (
+                    {auth.user?.role === "admin" && (
                       <NavLink
                         to="/admin/dashboard"
                         className="text-white hover:bg-primary-500 px-3 py-2 rounded-md text-sm font-medium"
@@ -60,7 +62,7 @@ export default function Navbar() {
                         Dashboard
                       </NavLink>
                     )}
-                    {user?.role === "user" && (
+                    {auth.user?.role === "user" && (
                       <NavLink
                         to="/user/dashboard"
                         className="text-white hover:bg-primary-500 px-3 py-2 rounded-md text-sm font-medium"
@@ -83,8 +85,21 @@ export default function Navbar() {
                     </NavLink>
                   </div>
                 </div>
+                <div className="hidden md:block">
+                  {auth.user?.role === "user" &&
+                    bookings.upcomingBookings[0] && (
+                      <div>
+                        <CountdownTimer
+                          targetDate={bookings.upcomingBookings[0].slot.date}
+                          targetTime={
+                            bookings.upcomingBookings[0].slot.startTime
+                          }
+                        />
+                      </div>
+                    )}
+                </div>
                 <div>
-                  {token ? (
+                  {auth.token ? (
                     <Button
                       onClick={() => dispatch(logout())}
                       className="btn-secondary"
@@ -132,6 +147,17 @@ export default function Navbar() {
               >
                 Contact
               </DisclosureButton>
+
+              <div>
+                {auth.user?.role === "user" && bookings.upcomingBookings[0] && (
+                  <div>
+                    <CountdownTimer
+                      targetDate={bookings.upcomingBookings[0].slot.date}
+                      targetTime={bookings.upcomingBookings[0].slot.startTime}
+                    />
+                  </div>
+                )}
+              </div>
             </div>
           </DisclosurePanel>
         </>

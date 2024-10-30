@@ -115,7 +115,7 @@ const ServiceDetailsPage = () => {
                   key={slot._id}
                   className={`p-2 rounded-md ${
                     slot.isBooked === "booked"
-                      ? "bg-neutral-300 cursor-not-allowed"
+                      ? "bg-neutral-300 "
                       : selectedSlot?._id === slot._id
                       ? "bg-primary-700 text-white"
                       : "bg-primary-100 hover:bg-primary-700 hover:text-white"

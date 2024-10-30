@@ -1,32 +1,11 @@
-import { useEffect, useState } from "react";
+import { useAppSelector } from "../../redux/features/hooks";
 import { TBooking } from "../../types";
 import UpcomingBookingCard from "./UpcomingBookingCard";
 
-const UserBookings = ({ bookings }: { bookings: TBooking[] }) => {
-  const [upcomingBookings, setUpcomingBookings] = useState<TBooking[]>([]);
-  const [pastBookings, setPastBookings] = useState<TBooking[]>([]);
-
-  useEffect(() => {
-    const now = new Date();
-
-    const upcoming: TBooking[] = [];
-    const past: TBooking[] = [];
-
-    bookings.forEach((booking) => {
-      const bookingDateTime = new Date(
-        `${booking.slot.date}T${booking.slot.startTime}`
-      );
-
-      if (bookingDateTime > now) {
-        upcoming.push(booking);
-      } else {
-        past.push(booking);
-      }
-    });
-
-    setUpcomingBookings(upcoming);
-    setPastBookings(past);
-  }, [bookings]);
+const UserBookings = () => {
+  const { pastBookings, upcomingBookings } = useAppSelector(
+    (state) => state.bookings
+  );
 
   return (
     <div>

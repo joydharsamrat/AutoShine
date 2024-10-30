@@ -8,6 +8,7 @@ const bookingApi = baseApi.injectEndpoints({
         method: "POST",
         body: booking,
       }),
+      invalidatesTags: ["booking"],
     }),
     initiatePayment: builder.mutation({
       query: (data) => ({
@@ -21,18 +22,21 @@ const bookingApi = baseApi.injectEndpoints({
         url: "bookings",
         method: "GET",
       }),
+      providesTags: ["booking"],
     }),
     getBookingsForUser: builder.query({
       query: (id) => ({
         url: `bookings/user/${id}`,
         method: "GET",
       }),
+      providesTags: ["booking"],
     }),
     getMyBookings: builder.query({
       query: () => ({
         url: `my-bookings`,
         method: "GET",
       }),
+      providesTags: ["booking"],
     }),
   }),
 });

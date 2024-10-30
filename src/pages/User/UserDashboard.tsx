@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useGetMyBookingsQuery } from "../../redux/features/booking/booking.api";
 import { useGetUserByIdQuery } from "../../redux/features/user/user.api";
 import { useAppSelector } from "../../redux/features/hooks";
 import UserBookings from "../../components/UserDashboard/UserBookings";
@@ -11,8 +10,6 @@ const UserDashboard = () => {
   const { data: userData, isLoading: userLoading } = useGetUserByIdQuery(
     user?._id
   );
-  const { data: bookings, isLoading: bookingsLoading } =
-    useGetMyBookingsQuery(undefined);
 
   const [isEditing, setIsEditing] = useState(false);
 
@@ -79,11 +76,7 @@ const UserDashboard = () => {
         <h2 className="text-2xl font-semibold text-gray-800 mb-6">
           Your Bookings
         </h2>
-        {bookingsLoading ? (
-          <p className="text-gray-500">Loading bookings...</p>
-        ) : (
-          <UserBookings bookings={bookings?.data || []} />
-        )}
+        <UserBookings />
       </div>
 
       {/* Edit User Modal */}
