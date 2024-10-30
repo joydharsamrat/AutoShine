@@ -5,11 +5,15 @@ import ScrollToTopButton from "../Shared/ScrollToTopButton";
 import { useGetMyBookingsQuery } from "../../redux/features/booking/booking.api";
 import { useEffect } from "react";
 import { TBooking } from "../../types";
-import { useAppDispatch } from "../../redux/features/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/features/hooks";
 import { setBookings } from "../../redux/features/booking/bookingSlice";
+import { getToken } from "../../redux/features/auth/authSlice";
 
 const MainLayout = () => {
-  const { data: bookings, isLoading } = useGetMyBookingsQuery(undefined);
+  const token = useAppSelector(getToken);
+  const { data: bookings, isLoading } = useGetMyBookingsQuery(undefined, {
+    skip: !token,
+  });
   const dispatch = useAppDispatch();
 
   useEffect(() => {
