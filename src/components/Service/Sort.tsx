@@ -17,11 +17,7 @@ const Sort: React.FC<SortingComponentProps> = ({
 
   return (
     <div className="flex flex-col gap-2">
-      {/* Mobile View */}
-      <div
-        className="flex items-center gap-2 lg:hidden"
-        onClick={() => setOpenSort(!openSort)}
-      >
+      <div className="flex items-center gap-2 text-sm">
         <svg
           width="20"
           height="21"
@@ -46,11 +42,6 @@ const Sort: React.FC<SortingComponentProps> = ({
             </clipPath>
           </defs>
         </svg>
-        <p>Sort By : {sortLabel}</p>
-      </div>
-
-      {/* Desktop View */}
-      <div className="hidden lg:flex items-center gap-2 text-sm">
         <p>Sort By:</p>
         <p
           className="cursor-pointer flex justify-between "
