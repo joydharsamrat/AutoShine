@@ -3,9 +3,10 @@ import { useGetUserByIdQuery } from "../../redux/features/user/user.api";
 import { useAppSelector } from "../../redux/features/hooks";
 import UserBookings from "../../components/UserDashboard/UserBookings";
 import EditUserInfoModal from "../../components/UserDashboard/EditUserInfoModal";
+import { getCurrentUser } from "../../redux/features/auth/authSlice";
 
 const UserDashboard = () => {
-  const { user } = useAppSelector((state) => state.auth);
+  const user = useAppSelector(getCurrentUser);
 
   const { data: userData, isLoading: userLoading } = useGetUserByIdQuery(
     user?._id

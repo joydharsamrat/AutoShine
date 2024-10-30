@@ -15,12 +15,13 @@ import { RxSlash } from "react-icons/rx";
 import { TReview } from "../../types";
 import ReviewCard from "../Review/ReviewCard";
 import ReviewCardSkeleton from "../Shared/Loaders/Skeleton/ReviewSkeleton";
+import { getToken } from "../../redux/features/auth/authSlice";
 
 export default function ReviewSection() {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [feedback, setFeedback] = useState("");
-  const userData = useAppSelector((state) => state.auth);
+  const token = useAppSelector(getToken);
   const navigate = useNavigate();
   const [createReview] = useCreateReviewMutation();
   const { data, isLoading } = useGetAllReviewsQuery({ limit: 2 });
@@ -31,7 +32,6 @@ export default function ReviewSection() {
     const loadingToast = toast.loading("Loading...");
     try {
       await createReview({
-        user: userData.user?._id,
         review: feedback,
         rating,
       }).unwrap();
@@ -61,7 +61,7 @@ export default function ReviewSection() {
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
-      {!userData?.token && (
+      {!token && (
         <motion.div
           className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center animate__animated animate__fadeIn"
           initial={{ opacity: 0 }}
@@ -126,7 +126,7 @@ export default function ReviewSection() {
             <button
               onClick={handleSubmit}
               className="btn-primary"
-              disabled={!userData?.token || !feedback || rating === 0}
+              disabled={!token || !feedback || rating === 0}
             >
               Submit Review
             </button>
