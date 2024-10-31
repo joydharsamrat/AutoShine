@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../Shared/Nav";
 import Footer from "../Shared/Footer";
 import ScrollToTopButton from "../Shared/ScrollToTopButton";
@@ -15,13 +15,19 @@ const MainLayout = () => {
     skip: !token,
   });
   const dispatch = useAppDispatch();
+  const location = useLocation();
+
+  useEffect(() => {
+    // Scroll to the top on location change
+    window.scrollTo(0, 0);
+  }, [location]);
 
   useEffect(() => {
     const now = new Date();
     const upcoming: TBooking[] = [];
     const past: TBooking[] = [];
     if (!isLoading && bookings?.data?.length) {
-      bookings.data.forEach((booking: TBooking) => {
+      bookings.data?.forEach((booking: TBooking) => {
         const bookingDateTime = new Date(
           `${booking.slot.date}T${booking.slot.startTime}`
         );

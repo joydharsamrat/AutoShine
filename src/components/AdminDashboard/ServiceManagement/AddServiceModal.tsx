@@ -15,7 +15,7 @@ export default function AddServiceModal({
   isOpen,
   setIsOpen,
 }: AddServiceModalProps) {
-  const [addService] = useCreateServiceMutation();
+  const [addService, { isLoading }] = useCreateServiceMutation();
 
   const handleAddService = async (data: Record<string, unknown>) => {
     const loadingToast = toast.loading("Adding service...");
@@ -102,7 +102,11 @@ export default function AddServiceModal({
                 >
                   Cancel
                 </Button>
-                <Button type="submit" className="btn-secondary">
+                <Button
+                  disabled={isLoading}
+                  type="submit"
+                  className="btn-secondary"
+                >
                   Update
                 </Button>
               </div>

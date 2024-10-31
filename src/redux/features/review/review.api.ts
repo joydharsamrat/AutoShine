@@ -4,7 +4,7 @@ const productApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     createReview: builder.mutation({
       query: (review) => ({
-        url: "reviews/create-review",
+        url: "/reviews/create-review",
         method: "POST",
         body: review,
       }),
@@ -19,7 +19,7 @@ const productApi = baseApi.injectEndpoints({
         }
 
         return {
-          url: `reviews?${params.toString()}`,
+          url: `/reviews?${params.toString()}`,
           method: "GET",
         };
       },

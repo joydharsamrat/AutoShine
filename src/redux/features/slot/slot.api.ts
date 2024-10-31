@@ -4,7 +4,7 @@ const slotApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getGroupedSlotsByService: builder.query({
       query: () => ({
-        url: "slots/grouped",
+        url: "/slots/grouped",
         method: "GET",
       }),
       providesTags: ["slots"],
@@ -22,7 +22,7 @@ const slotApi = baseApi.injectEndpoints({
         }
 
         return {
-          url: `slots?${params.toString()}`,
+          url: `/slots?${params.toString()}`,
           method: "GET",
         };
       },
@@ -30,7 +30,7 @@ const slotApi = baseApi.injectEndpoints({
     getSlotById: builder.query({
       query: (id) => {
         return {
-          url: `slots/${id}`,
+          url: `/slots/${id}`,
           method: "GET",
         };
       },
@@ -38,7 +38,7 @@ const slotApi = baseApi.injectEndpoints({
     toggleSlotStatus: builder.mutation({
       query: ({ id, status }) => {
         return {
-          url: `slots/toggle-status/${id}`,
+          url: `/slots/toggle-status/${id}`,
           method: "PUT",
           body: { status },
         };

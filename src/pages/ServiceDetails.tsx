@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
@@ -9,12 +9,15 @@ import { formatDate } from "../utils/fomatDate";
 import { TSlot } from "../types";
 import BackButton from "../components/Shared/BackButton";
 import { useGetSlotsForServiceQuery } from "../redux/features/slot/slot.api";
+import Loader from "../components/Shared/Loaders/Loader";
+import ConfirmBookingModal from "../components/Service/ConfirmBookingModal";
 
 const ServiceDetailsPage = () => {
   const { id } = useParams();
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedSlot, setSelectedSlot] = useState<TSlot | null>(null);
-  const navigate = useNavigate();
+
+  const [isOpen, setIsOpen] = useState(false);
 
   const { data: serviceData, isLoading: serviceLoading } =
     useGetServiceByIdQuery(id);
@@ -29,13 +32,7 @@ const ServiceDetailsPage = () => {
   }, [selectedDate]);
 
   if (serviceLoading || slotsLoading) {
-    return (
-      <div className="flex justify-center  animate__animated animate__fadeIn h-screen ">
-        <p className="bg-primary-700 text-white w-fit h-fit box-shadow p-1 mt-2 rounded-md animate-pulse">
-          Loading...
-        </p>
-      </div>
-    );
+    return <Loader />;
   }
 
   if (!serviceData.data) {
@@ -46,13 +43,21 @@ const ServiceDetailsPage = () => {
     );
   }
 
+  const sortedSlots = slotsData?.data
+    ? slotsData.data
+        .slice()
+        .sort((a: TSlot, b: TSlot) => a.startTime.localeCompare(b.startTime))
+    : [];
+
   const { name, description, price, duration } = serviceData.data;
 
   const handleSlotClick = (slot: TSlot) => {
     if (selectedSlot?._id === slot._id) {
       setSelectedSlot(null);
+      setIsOpen(false);
     } else if (slot.isBooked === "available") {
       setSelectedSlot(slot);
+      setIsOpen(true);
     }
   };
 
@@ -106,11 +111,11 @@ const ServiceDetailsPage = () => {
           <h2 className="text-2xl font-semibold text-primary-700 mb-4">
             Time Slots
           </h2>
-          {slotsData?.data && slotsData.data.length === 0 ? ( // Check if there are no available slots
+          {sortedSlots && sortedSlots.length === 0 ? (
             <p className="text-red-500">No slots available for this date.</p>
           ) : (
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-              {slotsData?.data?.map((slot: TSlot) => (
+              {sortedSlots?.map((slot: TSlot) => (
                 <motion.button
                   key={slot._id}
                   className={`p-2 rounded-md ${
@@ -133,27 +138,14 @@ const ServiceDetailsPage = () => {
           )}
         </div>
 
-        {selectedSlot && (
-          <motion.div
-            className="mt-8 p-4 bg-primary-100 rounded-lg shadow-md"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            <h3 className="text-lg font-semibold text-primary-700 mb-2">
-              Selected Slot
-            </h3>
-            <p className="text-neutral-700">
-              {formatDate(selectedDate)} at{" "}
-              {`${selectedSlot.startTime} - ${selectedSlot.endTime}`}
-            </p>
-            <button
-              onClick={() => navigate(`/booking/${selectedSlot._id}`)}
-              className="mt-4 btn-primary"
-            >
-              Confirm Booking
-            </button>
-          </motion.div>
+        {selectedSlot && isOpen && (
+          <ConfirmBookingModal
+            isOpen={isOpen}
+            selectedDate={selectedDate}
+            selectedSlot={selectedSlot}
+            setIsOpen={setIsOpen}
+            setSelectedSlot={setSelectedSlot}
+          />
         )}
       </div>
     </div>

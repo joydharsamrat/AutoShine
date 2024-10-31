@@ -13,20 +13,19 @@ const UpcomingBookingCard = ({ booking }: { booking: TBooking }) => {
         />
       </div>
 
-      {/* Service Details */}
       <h3 className="text-lg font-semibold text-gray-800 mb-1 text-center">
         {booking.service.name}
       </h3>
-      <p className="text-gray-600 text-center">{booking.service.description}</p>
+      <p className="text-gray-600 text-center text-sm">
+        {booking.service.description}
+      </p>
 
-      {/* Date and Time */}
-      <div className="mt-3 text-xs text-gray-700 flex gap-2">
+      <div className="mt-3 text-xs text-gray-700 flex gap-2 items-center justify-between">
         <p className="mb-1">
-          <span className="font-medium">Date:</span> {booking.slot.date}
+          <span>Date:</span> {booking.slot.date}
         </p>
         <p>
-          <span className="font-medium">Time:</span> {booking.slot.startTime} -{" "}
-          {booking.slot.endTime}
+          <span>Time:</span> {booking.slot.startTime} - {booking.slot.endTime}
         </p>
       </div>
     </div>

@@ -20,7 +20,7 @@ type AddSlotModalProps = {
 };
 
 export default function AddSlotModal({ isOpen, setIsOpen }: AddSlotModalProps) {
-  const [createSlots] = useCreateSlotsMutation();
+  const [createSlots, { isLoading }] = useCreateSlotsMutation();
   const { data: services, isLoading: servicesLoading } = useGetAllServicesQuery(
     { searchParams: "", limit: 0 }
   );
@@ -124,7 +124,11 @@ export default function AddSlotModal({ isOpen, setIsOpen }: AddSlotModalProps) {
                 >
                   Cancel
                 </Button>
-                <Button type="submit" className="btn-primary">
+                <Button
+                  disabled={isLoading}
+                  type="submit"
+                  className="btn-primary"
+                >
                   Add Slot
                 </Button>
               </div>

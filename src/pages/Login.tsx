@@ -17,7 +17,6 @@ const Login = () => {
   const dispatch = useAppDispatch();
 
   const onSubmit = async (data: FieldValues) => {
-    console.log(data);
     const loadingToast = toast.loading("Logging In...");
 
     try {

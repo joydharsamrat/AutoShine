@@ -22,7 +22,7 @@ const productApi = baseApi.injectEndpoints({
         }
 
         return {
-          url: `services?${params.toString()}`,
+          url: `/services?${params.toString()}`,
           method: "GET",
         };
       },
@@ -30,13 +30,13 @@ const productApi = baseApi.injectEndpoints({
     }),
     getServiceById: builder.query({
       query: (id) => ({
-        url: `services/${id}`,
+        url: `/services/${id}`,
         method: "GET",
       }),
     }),
     getFeaturedServices: builder.query({
       query: () => ({
-        url: "services/featured",
+        url: "/services/featured",
         method: "GET",
       }),
     }),
@@ -44,7 +44,7 @@ const productApi = baseApi.injectEndpoints({
     updateService: builder.mutation({
       query: ({ data, id }) => {
         return {
-          url: `services/${id}`,
+          url: `/services/${id}`,
           method: "PUT",
           body: data,
         };
@@ -54,7 +54,7 @@ const productApi = baseApi.injectEndpoints({
     deleteService: builder.mutation({
       query: (id) => {
         return {
-          url: `services/${id}`,
+          url: `/services/${id}`,
           method: "DELETE",
         };
       },
@@ -63,7 +63,7 @@ const productApi = baseApi.injectEndpoints({
     createSlots: builder.mutation({
       query: (data) => {
         return {
-          url: `services/slots`,
+          url: `/services/slots`,
           method: "POST",
           body: data,
         };

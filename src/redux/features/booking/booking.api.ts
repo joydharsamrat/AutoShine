@@ -4,7 +4,7 @@ const bookingApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     createBooking: builder.mutation({
       query: (booking) => ({
-        url: "bookings",
+        url: "/bookings",
         method: "POST",
         body: booking,
       }),
@@ -12,28 +12,28 @@ const bookingApi = baseApi.injectEndpoints({
     }),
     initiatePayment: builder.mutation({
       query: (data) => ({
-        url: "payment",
+        url: "/payment",
         method: "POST",
         body: data,
       }),
     }),
     getAllBookings: builder.query({
       query: () => ({
-        url: "bookings",
+        url: "/bookings",
         method: "GET",
       }),
       providesTags: ["booking"],
     }),
     getBookingsForUser: builder.query({
       query: (id) => ({
-        url: `bookings/user/${id}`,
+        url: `/bookings/user/${id}`,
         method: "GET",
       }),
       providesTags: ["booking"],
     }),
     getMyBookings: builder.query({
       query: () => ({
-        url: `my-bookings`,
+        url: `/my-bookings`,
         method: "GET",
       }),
       providesTags: ["booking"],
