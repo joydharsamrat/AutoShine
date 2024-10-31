@@ -11,11 +11,17 @@ const UserBookings = () => {
     <div>
       <div className="p-4">
         <h2 className="text-xl font-bold mb-4">Upcoming Bookings</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {upcomingBookings?.map((booking: TBooking) => (
-            <UpcomingBookingCard key={booking._id} booking={booking} />
-          ))}
-        </div>
+        {upcomingBookings.length ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {upcomingBookings?.map((booking: TBooking) => (
+              <UpcomingBookingCard key={booking._id} booking={booking} />
+            ))}
+          </div>
+        ) : (
+          <div className="text-red-500">
+            <p>No upcoming bookings.</p>
+          </div>
+        )}
 
         <h2 className="text-xl font-bold mt-6">Past Bookings</h2>
         <table className="min-w-full mt-4">

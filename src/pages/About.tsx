@@ -22,7 +22,7 @@ const values = [
 
 const About = () => {
   return (
-    <div className=" py-16">
+    <div className=" pt-16">
       <motion.div
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -82,8 +82,9 @@ const About = () => {
           ))}
         </div>
       </div>
-
-      <OurTeam />
+      <div className="bg-neutral-200">
+        <OurTeam />
+      </div>
     </div>
   );
 };

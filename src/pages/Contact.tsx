@@ -10,30 +10,31 @@ const Contact = () => {
   };
 
   return (
-    <section className="bg-neutral-100 py-16">
+    <section className="bg-neutral-100 py-8 lg:py-16 px-4">
       <div className="container mx-auto max-w-4xl">
         <h2 className="text-3xl font-bold text-primary-700 text-center mb-8">
           Contact Us
         </h2>
 
-        <div className="flex justify-center space-x-8 mb-12">
-          <div className="flex-1 flex flex-col justify-center items-center gap-1">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          <div className="flex flex-col justify-center items-center text-center gap-1">
             <FaPhoneAlt className="text-primary-500 text-3xl mb-2" />
             <p className="text-lg font-semibold text-neutral-900">Call Us</p>
             <p className="text-neutral-700">+1 (123) 456-7890</p>
           </div>
-          <div className="flex-1 flex flex-col justify-center items-center gap-1">
+          <div className="flex flex-col justify-center items-center text-center gap-1">
             <FaEnvelope className="text-primary-500 text-3xl mb-2" />
             <p className="text-lg font-semibold text-neutral-900">Email Us</p>
             <p className="text-neutral-700">info@autoshine.com</p>
           </div>
-          <div className="flex-1 flex flex-col justify-center items-center gap-1">
+          <div className="flex flex-col justify-center items-center text-center gap-1">
             <FaMapMarkerAlt className="text-primary-500 text-3xl mb-2" />
             <p className="text-lg font-semibold text-neutral-900">Visit Us</p>
-            <p className="text-neutral-700">123 Main Street, Anytown, USA</p>
+            <p className="text-neutral-700">123 Shine St, Car City, CC 45678</p>
           </div>
         </div>
-        <div className="bg-white p-8 shadow-lg rounded-lg">
+
+        <div className="bg-white p-6 sm:p-8 shadow-lg rounded-lg">
           <form onSubmit={(e) => handleSubmit(e)} className="space-y-6">
             <div className="flex flex-col">
               <label
