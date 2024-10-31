@@ -1,50 +1,71 @@
-# React + TypeScript + Vite
+# AutoShine
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+This package includes the client component of A Car washing booking system application.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**[LIVE LINK](https://auto-shine.vercel.app/)**
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Secure sign-up and login using JWT.
+- Admins can create, update, and delete car washing services and slots.
+- Users can see availability of slots and book available time slots for their preferred services.
+- Admins can view and manage all bookings and make other users admin.
 
-- Configure the top-level `parserOptions` property like this:
+## Technologies Used
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- Frontend: React, Typescript, Tailwind css, Headless ui
+- Backend: Node.js, Express.js, Typescript
+- Authentication: JWT (JSON Web Tokens)
+- Database: MongoDB, Mongoose
+
+## Cloning the Repositories
+
+clone the repository:
+
+```sh
+client: git clone https://github.com/joydharsamrat/AutoShine.git
+server: git clone https://github.com/joydharsamrat/AutoShine-server.git
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Installing Dependencies
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+Navigate to the directory and install the required dependencies using npm.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```sh
+client:
+cd AutoShine
+npm install
+
+server:
+cd AutoShine-server
+npm install
+```
+
+## Environment Configuration
+
+Create a .env file in the root directory with the following contents:
+
+client: N/A
+
+Server:
+
+```sh
+NODE_ENV=ENVIRONMENT_OF_THE_APP
+PORT=THE_PORT_THIS_APP_WILL_RUN_ON
+DB_URL=YOUR_DATABASE_URL
+BCRYPT_SALT_ROUNDS=SALT_ROUNDS_FOR_BCRYPT
+JWT_ACCESS_TOKEN_SECRET=SECRET_FOR_JWT_ACCESS_TOKEN
+JWT_REFRESH_TOKEN_SECRET=SECRET_FOR_JWT_REFRESH_TOKEN
+
+```
+
+## Running the Application Locally
+
+Run the development server:
+
+```sh
+Client: npm run dev
+Server: npm run dev
 ```
