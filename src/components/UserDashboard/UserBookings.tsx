@@ -24,26 +24,32 @@ const UserBookings = () => {
         )}
 
         <h2 className="text-xl font-bold mt-6">Past Bookings</h2>
-        <table className="min-w-full mt-4">
-          <thead>
-            <tr>
-              <th className="border p-2">Service</th>
-              <th className="border p-2">Date</th>
-              <th className="border p-2">Time</th>
-            </tr>
-          </thead>
-          <tbody>
-            {pastBookings?.map((booking: TBooking) => (
-              <tr key={booking._id}>
-                <td className="border p-2">{booking.service.name}</td>
-                <td className="border p-2">{booking.slot.date}</td>
-                <td className="border p-2">
-                  {booking.slot.startTime}-{booking.slot.endTime}
-                </td>
+        {pastBookings?.length ? (
+          <table className="min-w-full mt-4">
+            <thead>
+              <tr>
+                <th className="border p-2">Service</th>
+                <th className="border p-2">Date</th>
+                <th className="border p-2">Time</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {pastBookings?.map((booking: TBooking) => (
+                <tr key={booking._id}>
+                  <td className="border p-2">{booking.service.name}</td>
+                  <td className="border p-2">{booking.slot.date}</td>
+                  <td className="border p-2">
+                    {booking.slot.startTime}-{booking.slot.endTime}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <div className="text-red-500">
+            <p className="mt-5">No past bookings.</p>
+          </div>
+        )}
       </div>
     </div>
   );

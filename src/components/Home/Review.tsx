@@ -15,13 +15,14 @@ import { RxSlash } from "react-icons/rx";
 import { TReview } from "../../types";
 import ReviewCard from "../Review/ReviewCard";
 import ReviewCardSkeleton from "../Shared/Loaders/Skeleton/ReviewSkeleton";
-import { getToken } from "../../redux/features/auth/authSlice";
+import { getCurrentUser, getToken } from "../../redux/features/auth/authSlice";
 
 export default function ReviewSection() {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [feedback, setFeedback] = useState("");
   const token = useAppSelector(getToken);
+  const user = useAppSelector(getCurrentUser);
   const navigate = useNavigate();
   const [createReview] = useCreateReviewMutation();
   const { data, isLoading } = useGetAllReviewsQuery({ limit: 2 });
@@ -86,7 +87,7 @@ export default function ReviewSection() {
       </h2>
 
       <div className="max-w-7xl mx-auto">
-        {!isSubmitted ? (
+        {(!isSubmitted && user?.role === "user") || !token ? (
           <motion.div
             className="bg-neutral-200 p-6 rounded-lg shadow-xl max-w-4xl mx-auto"
             initial={{ scale: 0.95 }}

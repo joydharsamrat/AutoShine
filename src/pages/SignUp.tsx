@@ -20,8 +20,10 @@ const SignUp = () => {
       toast.success("Sign up successful!", { id: loadingToast });
       navigate("/login");
     } catch (error: any) {
+      toast.error(error.data.message || "Sign up failed. Please try again.", {
+        id: loadingToast,
+      });
       console.log(error);
-      toast.error("Sign up failed. Please try again.", { id: loadingToast });
     }
   };
 
@@ -74,7 +76,7 @@ const SignUp = () => {
               rules={{
                 required: "Phone number is required",
                 pattern: {
-                  value: /^\+?[1-9]\d{1,14}$/,
+                  value: /^\+?[0-9]\d{1,14}$/,
                   message: "Please enter a valid phone number",
                 },
               }}
