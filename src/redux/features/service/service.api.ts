@@ -8,6 +8,7 @@ const productApi = baseApi.injectEndpoints({
         method: "POST",
         body: service,
       }),
+      invalidatesTags: ["service"],
     }),
     getAllServices: builder.query({
       query: ({ searchTerm, sort }) => {

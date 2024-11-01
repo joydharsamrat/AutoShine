@@ -30,6 +30,9 @@ export default function ReviewSection() {
   const handleSubmit = async () => {
     if (!feedback || rating === 0) return;
     const loadingToast = toast.loading("Loading...");
+
+    console.log(feedback, rating);
+
     try {
       await createReview({
         review: feedback,
@@ -40,6 +43,7 @@ export default function ReviewSection() {
       setRating(0);
       toast.success("Thanks for your feedback!", { id: loadingToast });
     } catch (error: any) {
+      console.log(error);
       toast.error(
         error.message ||
           error.data.message ||

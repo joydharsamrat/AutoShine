@@ -7,12 +7,13 @@ import { useEffect } from "react";
 import { TBooking } from "../../types";
 import { useAppDispatch, useAppSelector } from "../../redux/features/hooks";
 import { setBookings } from "../../redux/features/booking/bookingSlice";
-import { getToken } from "../../redux/features/auth/authSlice";
+import { getCurrentUser, getToken } from "../../redux/features/auth/authSlice";
 
 const MainLayout = () => {
   const token = useAppSelector(getToken);
+  const user = useAppSelector(getCurrentUser);
   const { data: bookings, isLoading } = useGetMyBookingsQuery(undefined, {
-    skip: !token,
+    skip: !token || user?.role === "admin",
   });
   const dispatch = useAppDispatch();
   const location = useLocation();

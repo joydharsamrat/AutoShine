@@ -4,7 +4,7 @@
 }
 
 .swipeSlide {
-  @apply bg-primary-700 max-w-[250px] text-neutral-200 h-auto rounded-[50%_50%_5px_5px];
+  @apply bg-primary-700 max-w-[250px] text-neutral-200 h-auto rounded-[50%_50%_5px_5px] cursor-grab;
 }
 .memberImageContainer {
   @apply rounded-full relative w-[90%] ml-auto mr-auto overflow-hidden bg-neutral-200;

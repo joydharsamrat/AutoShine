@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useGetAllServicesQuery } from "../redux/features/service/service.api";
 import { TService } from "../types";
 import Sort from "../components/Service/Sort";
-import { motion } from "framer-motion";
 import ServiceCard from "../components/Service/ServiceCard";
 import ServiceCardSkeleton from "../components/Shared/Loaders/Skeleton/ServiceSkeleton";
 import CompareService from "../components/Service/CompareModal";
@@ -53,11 +52,11 @@ const ServicesPage = () => {
       </h1>
       <div className="mb-5 flex items-center justify-between">
         <div className="">
-          <motion.input
+          <input
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search services..."
-            className="p-2 border rounded-md mb-4 w-full md:w-1/3"
+            className="p-2 border rounded-md mb-4 w-full md:w-md"
           />
           <Sort
             sortOrder={sort}
