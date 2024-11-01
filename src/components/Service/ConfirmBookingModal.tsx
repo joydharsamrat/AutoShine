@@ -4,6 +4,9 @@ import { TSlot } from "../../types";
 import { FaTimes } from "react-icons/fa";
 import { formatDate } from "../../utils/fomatDate";
 import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../redux/features/hooks";
+import { getCurrentUser, getToken } from "../../redux/features/auth/authSlice";
+import toast from "react-hot-toast";
 
 type AddServiceModalProps = {
   isOpen: boolean;
@@ -21,10 +24,23 @@ export default function ConfirmBookingModal({
   setSelectedSlot,
 }: AddServiceModalProps) {
   const navigate = useNavigate();
-
+  const user = useAppSelector(getCurrentUser);
+  const token = useAppSelector(getToken);
   const closeModal = () => {
     setIsOpen(false);
     setSelectedSlot(null);
+  };
+
+  const handleConfirmBooking = () => {
+    if (!token) {
+      navigate("/login");
+      return;
+    } else if (user?.role === "admin") {
+      toast.error("Admins are not allowed to book a service !");
+      return;
+    }
+
+    navigate(`/booking/${selectedSlot._id}`);
   };
 
   return (
@@ -64,10 +80,7 @@ export default function ConfirmBookingModal({
           </div>
 
           <div className="mt-6 flex justify-center">
-            <Button
-              onClick={() => navigate(`/booking/${selectedSlot._id}`)}
-              className="btn-primary"
-            >
+            <Button onClick={handleConfirmBooking} className="btn-primary">
               Confirm Booking
             </Button>
           </div>

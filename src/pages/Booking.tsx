@@ -148,7 +148,7 @@ const Booking = () => {
                   required: "Phone number is required",
                   pattern: {
                     value: /^\d{11}$/,
-                    message: "Invalid phone number. It should be 10 digits.",
+                    message: "Invalid phone number. It should be 11 digits.",
                   },
                 }}
               />

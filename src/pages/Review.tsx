@@ -5,11 +5,11 @@ import ReviewCard from "../components/Review/ReviewCard";
 import ReviewCardSkeleton from "../components/Shared/Loaders/Skeleton/ReviewSkeleton";
 
 const Review = () => {
-  const { data, isLoading, isError } = useGetAllReviewsQuery({
+  const { data, isLoading } = useGetAllReviewsQuery({
     limit: 0,
   });
 
-  if ((!isLoading && isError) || !data?.data?.length) {
+  if (!isLoading && !data?.data?.length) {
     return (
       <div className="text-center py-16">
         <p className="text-2xl text-primary-700">No reviews found.</p>
