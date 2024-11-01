@@ -107,7 +107,7 @@ export default function AddServiceModal({
                   type="submit"
                   className="btn-secondary"
                 >
-                  Update
+                  Add
                 </Button>
               </div>
             </Form>
