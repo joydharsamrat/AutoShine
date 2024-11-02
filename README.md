@@ -6,6 +6,10 @@ This package includes the client component of A Car washing booking system appli
 
 **[LIVE LINK](https://auto-shine.vercel.app/)**
 
+admin email: joydharsamrat@gmail.com
+admin pass: 52615261
+
+
 ## Features
 
 - Secure sign-up and login using JWT.
