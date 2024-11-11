@@ -81,7 +81,7 @@ const OurTeam = () => {
           }}
           breakpoints={{
             520: {
-              slidesPerView: 3,
+              slidesPerView: 1,
               spaceBetween: 10,
             },
 

@@ -22,12 +22,12 @@ const values = [
 
 const About = () => {
   return (
-    <div className=" pt-16">
+    <div className=" pt-16 ">
       <motion.div
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="max-w-7xl mx-auto text-center mb-12 animate__animated animate__fadeIn"
+        className="max-w-7xl mx-auto text-center mb-12 animate__animated animate__fadeIn px-5"
       >
         <h1 className="text-4xl font-bold text-primary-700 mb-4">
           About AutoShine Car Wash
@@ -41,7 +41,7 @@ const About = () => {
         initial={{ opacity: 0, x: -100 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8 }}
-        className="mb-12 animate__animated animate__fadeInLeft max-w-7xl mx-auto"
+        className="mb-12 animate__animated animate__fadeInLeft max-w-7xl mx-auto px-5"
       >
         <h2 className="text-3xl font-semibold text-primary-700 mb-6">
           Our Story
@@ -65,7 +65,7 @@ const About = () => {
         <h2 className="text-3xl font-semibold text-white mb-6 text-center">
           Our Values
         </h2>
-        <div className="grid md:grid-cols-3 gap-8 mb-12 max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 mb-12 max-w-7xl mx-auto px-5">
           {values.map(({ title, text, delay }, index) => (
             <motion.div
               key={index}

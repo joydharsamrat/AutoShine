@@ -1,10 +1,10 @@
 /* Tailwind CSS @apply directive */
 .ourTeam {
-  @apply py-24 max-w-7xl mx-auto;
+  @apply py-24 max-w-7xl mx-auto px-10 sm:px-0;
 }
 
 .swipeSlide {
-  @apply bg-primary-700 max-w-[250px] text-neutral-200 h-auto rounded-[50%_50%_5px_5px] cursor-grab;
+  @apply bg-primary-700  sm:max-w-[250px] text-neutral-200 h-auto rounded-[50%_50%_5px_5px] cursor-grab;
 }
 .memberImageContainer {
   @apply rounded-full relative w-[90%] ml-auto mr-auto overflow-hidden bg-neutral-200;
