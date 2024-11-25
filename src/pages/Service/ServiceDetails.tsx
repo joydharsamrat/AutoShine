@@ -4,13 +4,13 @@ import { motion } from "framer-motion";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "animate.css";
-import { useGetServiceByIdQuery } from "../redux/features/service/service.api";
-import { formatDate } from "../utils/fomatDate";
-import { TSlot } from "../types";
-import BackButton from "../components/Shared/BackButton";
-import { useGetSlotsForServiceQuery } from "../redux/features/slot/slot.api";
-import Loader from "../components/Shared/Loaders/Loader";
-import ConfirmBookingModal from "../components/Service/ConfirmBookingModal";
+import { TSlot } from "../../types";
+import { useGetServiceByIdQuery } from "../../redux/features/service/service.api";
+import { useGetSlotsForServiceQuery } from "../../redux/features/slot/slot.api";
+import { formatDate } from "../../utils/fomatDate";
+import Loader from "../../components/Shared/Loaders/Loader";
+import BackButton from "../../components/Shared/BackButton";
+import ConfirmBookingModal from "../../components/Service/ConfirmBookingModal";
 
 const ServiceDetailsPage = () => {
   const { id } = useParams();

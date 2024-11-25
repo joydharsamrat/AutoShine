@@ -1,29 +1,38 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { FieldValues } from "react-hook-form";
-import Form from "../components/form/Form";
-import InputField from "../components/form/InputField";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import "animate.css";
-import { useSignUpMutation } from "../redux/features/auth/authApi";
 import toast from "react-hot-toast";
+import { jwtDecode } from "jwt-decode";
+import { useLoginMutation } from "../../redux/features/auth/authApi";
+import { useAppDispatch } from "../../redux/features/hooks";
+import { setUser } from "../../redux/features/auth/authSlice";
+import Form from "../../components/form/Form";
+import InputField from "../../components/form/InputField";
 
-const SignUp = () => {
+const Login = () => {
   const navigate = useNavigate();
-  const [createUser] = useSignUpMutation();
+  const [userLogin] = useLoginMutation();
+  const dispatch = useAppDispatch();
 
   const onSubmit = async (data: FieldValues) => {
-    const loadingToast = toast.loading("Signing up...");
+    const loadingToast = toast.loading("Logging In...");
 
     try {
-      await createUser(data).unwrap();
-      toast.success("Sign up successful!", { id: loadingToast });
-      navigate("/login");
+      const res = await userLogin(data).unwrap();
+      const user = jwtDecode(res.token);
+      dispatch(setUser({ user, token: res.token }));
+      toast.success("Login successful!", { id: loadingToast });
+      navigate("/");
     } catch (error: any) {
-      toast.error(error.data.message || "Sign up failed. Please try again.", {
-        id: loadingToast,
-      });
       console.log(error);
+      toast.error(
+        `${error?.data?.message}` || "Login failed! Please try again",
+        {
+          id: loadingToast,
+        }
+      );
     }
   };
 
@@ -31,21 +40,9 @@ const SignUp = () => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-primary-700 to-secondary-700 p-5">
       <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full animate__animated animate__fadeIn">
         <h2 className="text-3xl font-bold text-center text-primary-700 mb-8">
-          Sign Up
+          Login
         </h2>
         <Form onSubmit={onSubmit}>
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            <InputField
-              type="text"
-              label="Name"
-              name="name"
-              rules={{ required: "Name is required" }}
-            />
-          </motion.div>
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -64,30 +61,7 @@ const SignUp = () => {
               }}
             />
           </motion.div>
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            <InputField
-              type="text"
-              label="Phone"
-              name="phone"
-              rules={{
-                required: "Phone number is required",
-                pattern: {
-                  value: /^\+?[0-9]\d{1,14}$/,
-                  message: "Please enter a valid phone number",
-                },
-              }}
-            />
-            <InputField
-              type="text"
-              label="Address"
-              name="address"
-              rules={{ required: "Address is required" }}
-            />
-          </motion.div>
+
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -106,13 +80,16 @@ const SignUp = () => {
               }}
             />
           </motion.div>
+          <Link to="/forget-password" className="text-xs text-primary-700">
+            Forgotten your password ?
+          </Link>
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.5 }}
             className="mt-5 grid place-items-center"
           >
-            <input type="submit" value="Sign Up" className="btn-primary " />
+            <input type="submit" value="Login" className="btn-primary " />
           </motion.div>
         </Form>
         <motion.div
@@ -122,12 +99,12 @@ const SignUp = () => {
           className="mt-4 text-center"
         >
           <p className="text-sm text-gray-600">
-            Already have an account?{" "}
+            New to AutoShine?{" "}
             <Link
-              to="/login"
+              to="/register"
               className="text-primary-700 font-semibold hover:underline transition duration-200"
             >
-              Log in
+              SignUp
             </Link>
           </p>
         </motion.div>
@@ -136,4 +113,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Login;

@@ -8,7 +8,7 @@ import {
   fetchBaseQuery,
 } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../features/store";
-import { logout } from "../features/auth/authSlice";
+import { logout, setUser } from "../features/auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: "https://auto-shine-server.vercel.app/api/v1",
@@ -27,13 +27,30 @@ const baseQueryWithLogout: BaseQueryFn<
   BaseQueryApi,
   DefinitionType
 > = async (args, api, extraOptions): Promise<any> => {
-  const result = await baseQuery(args, api, extraOptions);
+  let result = await baseQuery(args, api, extraOptions);
 
-  if (result.error && result.error.status === 401) {
-    api.dispatch(logout());
-    window.location.href = "/login";
+  if (result.error?.status === 401) {
+    const res = await fetch(
+      "https://auto-shine-server.vercel.app/api/v1/auth/access-token",
+      {
+        method: "POST",
+        credentials: "include",
+      }
+    );
+    const data = await res.json();
+
+    console.log(data);
+    if (data?.accessToken) {
+      const user = (api.getState() as RootState).auth.user;
+
+      api.dispatch(setUser({ user, token: data.accessToken }));
+
+      result = await baseQuery(args, api, extraOptions);
+    } else {
+      api.dispatch(logout());
+      window.location.href = "/login";
+    }
   }
-
   return result;
 };
 

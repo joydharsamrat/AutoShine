@@ -2,11 +2,6 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import NotFound from "../pages/NotFound";
 import MainLayout from "../components/Layouts/MainLayout";
-import Services from "../pages/Services";
-import ServiceDetails from "../pages/ServiceDetails";
-import Booking from "../pages/Booking";
-import Login from "../pages/Login";
-import SignUp from "../pages/SignUp";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
 import Review from "../pages/Review";
@@ -20,6 +15,13 @@ import ServiceManagement from "../pages/Admin/ServiceManagement";
 import Bookings from "../pages/Admin/Bookings";
 import UserRoute from "../components/Layouts/UserRoute";
 import UserDashboard from "../pages/User/UserDashboard";
+import SignUp from "../pages/Auth/SignUp";
+import Login from "../pages/Auth/Login";
+import ServicesPage from "../pages/Service/Services";
+import ServiceDetailsPage from "../pages/Service/ServiceDetails";
+import Booking from "../pages/Service/Booking";
+import ForgetPass from "../pages/Auth/ForgetPassword";
+import ResetPass from "../pages/Auth/ResetPassword";
 
 export const router = createBrowserRouter([
   {
@@ -36,11 +38,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/services",
-        element: <Services />,
+        element: <ServicesPage />,
       },
       {
         path: "/services/:id",
-        element: <ServiceDetails />,
+        element: <ServiceDetailsPage />,
       },
       {
         path: "/booking/:id",
@@ -107,6 +109,14 @@ export const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/forget-password",
+    element: <ForgetPass />,
+  },
+  {
+    path: "/reset-password",
+    element: <ResetPass />,
   },
 
   {

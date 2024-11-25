@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
+import toast from "react-hot-toast";
+import { FieldValues } from "react-hook-form";
+import { useGetSlotByIdQuery } from "../../redux/features/slot/slot.api";
 import {
   useCreateBookingMutation,
   useInitiatePaymentMutation,
-} from "../redux/features/booking/booking.api";
-import Loader from "../components/Shared/Loaders/Loader";
-import toast from "react-hot-toast";
-import { FieldValues } from "react-hook-form";
-import Form from "../components/form/Form";
-import InputField from "../components/form/InputField";
-import BackButton from "../components/Shared/BackButton";
-import { useGetSlotByIdQuery } from "../redux/features/slot/slot.api";
+} from "../../redux/features/booking/booking.api";
+import Loader from "../../components/Shared/Loaders/Loader";
+import BackButton from "../../components/Shared/BackButton";
+import Form from "../../components/form/Form";
+import InputField from "../../components/form/InputField";
 
 const Booking = () => {
   const { id } = useParams();

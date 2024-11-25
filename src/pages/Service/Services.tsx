@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { useGetAllServicesQuery } from "../redux/features/service/service.api";
-import { TService } from "../types";
-import Sort from "../components/Service/Sort";
-import ServiceCard from "../components/Service/ServiceCard";
-import ServiceCardSkeleton from "../components/Shared/Loaders/Skeleton/ServiceSkeleton";
-import CompareService from "../components/Service/CompareModal";
+import { TService } from "../../types";
+import { useGetAllServicesQuery } from "../../redux/features/service/service.api";
+import Sort from "../../components/Service/Sort";
+import ServiceCardSkeleton from "../../components/Shared/Loaders/Skeleton/ServiceSkeleton";
+import ServiceCard from "../../components/Service/ServiceCard";
+import CompareService from "../../components/Service/CompareModal";
 
 const ServicesPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
