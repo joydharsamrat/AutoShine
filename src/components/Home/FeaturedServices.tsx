@@ -15,7 +15,7 @@ export default function FeaturedServices() {
   const featuredServices = data?.data || [];
 
   return (
-    <section className="py-12 bg-white">
+    <section className="mt-20 bg-white px-5 max-w-7xl mx-auto">
       <h2 className="text-3xl font-bold text-center text-primary-700 ">
         Featured Services
       </h2>
@@ -28,15 +28,17 @@ export default function FeaturedServices() {
         loop={true}
         breakpoints={{
           640: { slidesPerView: 1 },
-          768: { slidesPerView: 2 },
+          768: { slidesPerView: 3 },
         }}
         spaceBetween={20}
-        pagination={true}
+        pagination={{
+          dynamicBullets: true,
+        }}
         navigation={true}
         style={{
           padding: "50px 0",
         }}
-        className="w-full max-w-7xl mx-auto "
+        className="w-full "
       >
         {isLoading ? (
           <div className="grid sm:grid-cols-2 gap-5">

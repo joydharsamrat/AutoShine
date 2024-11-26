@@ -32,6 +32,15 @@ export default {
           100: "#FFFFFF",
         },
       },
+      keyframes: {
+        glow: {
+          "0%, 100%": { boxShadow: "0 0 5px rgba(0, 0, 0, 0.1)" },
+          "50%": { boxShadow: "0 0 15px rgba(0, 0, 0, 0.2)" },
+        },
+      },
+      animation: {
+        glow: "glow 1.5s ease-in-out infinite",
+      },
     },
   },
   plugins: [],

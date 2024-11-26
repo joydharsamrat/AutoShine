@@ -1,6 +1,6 @@
 /* Tailwind CSS @apply directive */
 .ourTeam {
-  @apply py-24 max-w-7xl mx-auto px-10 sm:px-0;
+  @apply max-w-7xl mx-auto px-10 sm:px-5 mt-20;
 }
 
 .swipeSlide {
@@ -37,5 +37,5 @@
   @apply text-xs;
 }
 .sliderPaginationContainer {
-  @apply mt-12 flex justify-center;
+  @apply mt-20 flex justify-center;
 }

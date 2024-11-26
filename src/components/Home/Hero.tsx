@@ -7,7 +7,7 @@ import styles from "../../styles/home/Hero.module.css";
 
 export default function Hero() {
   return (
-    <div className="relative h-screen w-full mb-20">
+    <div className="relative h-screen sm:h-[80vh] w-full">
       {/* Background Slider */}
       <Swiper
         modules={[Autoplay, EffectFade]}
@@ -41,8 +41,8 @@ export default function Hero() {
         </SwiperSlide>
       </Swiper>
 
-      {/* Foreground Content */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white bg-black bg-opacity-70 z-10">
+      {/* Content */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white bg-black bg-opacity-70 z-10 px-5">
         <h1 className="text-4xl sm:text-6xl font-bold mb-4">
           Shine Bright with AutoShine!
         </h1>

@@ -18,7 +18,7 @@ export default function Navbar() {
     <Disclosure as="nav" className="bg-primary-700">
       {({ open }) => (
         <>
-          <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto px-5">
             <div className="relative flex items-center justify-between h-16">
               <div className=" flex items-center sm:hidden">
                 {/* Mobile menu button */}
@@ -31,7 +31,7 @@ export default function Navbar() {
                   )}
                 </DisclosureButton>
               </div>
-              <div className="flex-1 flex items-center justify-between px-2">
+              <div className="flex-1 flex items-center justify-between">
                 <NavLink to="/" className="flex-shrink-0 flex  items-end">
                   <img
                     src="/logo.png"
@@ -132,6 +132,25 @@ export default function Navbar() {
               >
                 Services
               </DisclosureButton>
+
+              {auth.user?.role === "admin" && (
+                <DisclosureButton
+                  as={NavLink}
+                  to="/admin/dashboard"
+                  className="block text-white hover:bg-primary-500 px-3 py-2 rounded-md text-base font-medium"
+                >
+                  Dashboard
+                </DisclosureButton>
+              )}
+              {auth.user?.role === "user" && (
+                <DisclosureButton
+                  as={NavLink}
+                  to="/user/dashboard"
+                  className="block text-white hover:bg-primary-500 px-3 py-2 rounded-md text-base font-medium"
+                >
+                  Dashboard
+                </DisclosureButton>
+              )}
 
               <DisclosureButton
                 as={NavLink}

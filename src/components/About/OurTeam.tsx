@@ -4,7 +4,7 @@ import { FaFacebook, FaTwitter, FaInstagram, FaYoutube } from "react-icons/fa";
 import style from "../../styles/about.module.css";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Autoplay } from "swiper/modules";
+import { Pagination } from "swiper/modules";
 
 const teamMembers = [
   {
@@ -73,12 +73,9 @@ const OurTeam = () => {
           <h2>Our Team</h2>
         </div>
         <Swiper
+          modules={[Pagination]}
           spaceBetween={30}
           slidesPerView={1}
-          autoplay={{
-            delay: 2000,
-            disableOnInteraction: true,
-          }}
           breakpoints={{
             520: {
               slidesPerView: 1,
@@ -95,7 +92,12 @@ const OurTeam = () => {
               spaceBetween: 50,
             },
           }}
-          modules={[Autoplay]}
+          style={{
+            paddingBottom: "50px",
+          }}
+          pagination={{
+            dynamicBullets: true,
+          }}
           loop={true}
         >
           {teamMembers.map((member, index) => (

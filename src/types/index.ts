@@ -17,6 +17,7 @@ export type TUserAuth = {
 };
 
 export type TReview = {
+  createdAt: string;
   user: {
     _id: string;
     name: string;

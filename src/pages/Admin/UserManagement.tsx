@@ -7,6 +7,7 @@ import {
 import { useGetBookingsForUserQuery } from "../../redux/features/booking/booking.api";
 import toast from "react-hot-toast";
 import { TBooking, TUser } from "../../types";
+import Loader from "../../components/Shared/Loaders/Loader";
 
 const UserManagement = () => {
   const { data: users, isLoading: usersLoading } = useGetUsersQuery(undefined);
@@ -48,109 +49,115 @@ const UserManagement = () => {
   };
 
   return (
-    <div className="p-4 bg-white shadow-md rounded-md">
-      <h2 className="text-xl font-bold mb-4">User Management</h2>
+    <div>
+      <div className="p-4  mb-5">
+        <h2 className="text-xl font-bold mb-4">User Management</h2>
 
-      {/* User List Section */}
-      <div className="mb-8">
-        <h3 className="text-lg font-semibold mb-2">User List</h3>
-        {usersLoading ? (
-          <p>Loading users...</p>
-        ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse mb-4">
-              <thead>
-                <tr>
-                  <th className="border p-2 text-sm sm:text-base min-w-[200px]">
-                    Name
-                  </th>
-                  <th className="border p-2 text-sm sm:text-base min-w-[200px]">
-                    Email
-                  </th>
-                  <th className="border p-2 text-sm sm:text-base min-w-[100px]">
-                    Role
-                  </th>
-                  <th className="border p-2 text-sm sm:text-base min-w-[300px]">
-                    Actions
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {users?.data.map((user: TUser) => (
-                  <tr key={user._id}>
-                    <td className="border p-2 text-sm sm:text-base min-w-[200px]">
-                      {user.name}
-                    </td>
-                    <td className="border p-2 text-sm sm:text-base min-w-[200px]">
-                      {user.email}
-                    </td>
-                    <td className="border p-2 text-sm sm:text-base min-w-[100px]">
-                      {user.role}
-                    </td>
-                    <td className="border p-2 flex space-x-2 text-sm sm:text-base min-w-[300px]">
-                      <button
-                        disabled={user.role === "admin"}
-                        onClick={() => handleViewBookings(user)}
-                        className={`${
-                          user.role === "user" ? "btn-primary" : "btn-neutral "
-                        } `}
-                      >
-                        View Bookings
-                      </button>
-                      {user.role === "user" && (
-                        <button
-                          onClick={() => handleMakeAdmin(user._id)}
-                          className="btn-secondary"
-                        >
-                          Make Admin
-                        </button>
-                      )}
-                    </td>
+        {/* User List Section */}
+        <div>
+          <h3 className="text-lg font-semibold mb-2">User List</h3>
+          {usersLoading ? (
+            <Loader />
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse bg-white shadow-md rounded-md">
+                <thead>
+                  <tr className="bg-primary-700 text-white ">
+                    <th className=" p-2 text-sm sm:text-base min-w-[200px] text-left whitespace-nowrap">
+                      Name
+                    </th>
+                    <th className=" p-2 text-sm sm:text-base min-w-[200px] text-left whitespace-nowrap">
+                      Email
+                    </th>
+                    <th className=" p-2 text-sm sm:text-base min-w-[100px ] text-left whitespace-nowrap">
+                      Role
+                    </th>
+                    <th className=" p-2 text-sm sm:text-base min-w-[300px] text-left whitespace-nowrap">
+                      Actions
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
+                </thead>
+                <tbody>
+                  {users?.data.map((user: TUser) => (
+                    <tr key={user._id}>
+                      <td className="border-b p-2 text-sm sm:text-base min-w-[200px]">
+                        {user.name}
+                      </td>
+                      <td className="border-b p-2 text-sm sm:text-base min-w-[200px]">
+                        {user.email}
+                      </td>
+                      <td className="border-b p-2 text-sm sm:text-base min-w-[100px]">
+                        {user.role}
+                      </td>
+                      <td className="border-b p-2 flex space-x-2 text-sm sm:text-base min-w-[300px]">
+                        <button
+                          disabled={user.role === "admin"}
+                          onClick={() => handleViewBookings(user)}
+                          className={`${
+                            user.role === "user"
+                              ? "btn-primary"
+                              : "btn-neutral "
+                          } `}
+                        >
+                          View Bookings
+                        </button>
+                        {user.role === "user" && (
+                          <button
+                            onClick={() => handleMakeAdmin(user._id)}
+                            className="btn-secondary"
+                          >
+                            Make Admin
+                          </button>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* User Bookings Section */}
-      <div className="overflow-x-auto">
+      <div className="p-4">
         <h3 className="text-lg font-semibold mb-2">User Bookings</h3>
         {selectedUser ? (
           bookingsLoading ? (
-            <p>Loading bookings...</p>
+            <Loader />
           ) : bookings && bookings.data.length > 0 ? (
-            <table className="w-full border-collapse mb-4">
-              <thead>
-                <tr>
-                  <th className="border p-2 text-sm sm:text-base min-w-[200px]">
-                    Service
-                  </th>
-                  <th className="border p-2 text-sm sm:text-base min-w-[200px]">
-                    Date
-                  </th>
-                  <th className="border p-2 text-sm sm:text-base min-w-[200px]">
-                    Time
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {bookings?.data.map((booking: TBooking) => (
-                  <tr key={booking._id}>
-                    <td className="border p-2 text-sm sm:text-base min-w-[200px]">
-                      {booking.service.name}
-                    </td>
-                    <td className="border p-2 text-sm sm:text-base min-w-[200px]">
-                      {booking.slot.date}
-                    </td>
-                    <td className="border p-2 text-sm sm:text-base min-w-[200px]">
-                      {booking.slot.startTime} - {booking.slot.endTime}
-                    </td>
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse mb-4 bg-white shadow-md rounded-md">
+                <thead>
+                  <tr className="bg-primary-700 text-white ">
+                    <th className="p-2 text-sm sm:text-base min-w-[200px] text-left whitespace-nowrap ">
+                      Service
+                    </th>
+                    <th className="p-2 text-sm sm:text-base min-w-[200px] text-left whitespace-nowrap">
+                      Date
+                    </th>
+                    <th className="p-2 text-sm sm:text-base min-w-[200px] text-left whitespace-nowrap">
+                      Time
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {bookings?.data.map((booking: TBooking) => (
+                    <tr key={booking._id}>
+                      <td className="border-b p-2 text-sm sm:text-base min-w-[200px] font-semibold">
+                        {booking.service.name}
+                      </td>
+                      <td className="border-b p-2 text-sm sm:text-base min-w-[200px]">
+                        {booking.slot.date}
+                      </td>
+                      <td className="border-b p-2 text-sm sm:text-base min-w-[200px]">
+                        {booking.slot.startTime} - {booking.slot.endTime}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           ) : (
             <p className="text-red-500">
               No bookings found for {selectedUser?.name}.

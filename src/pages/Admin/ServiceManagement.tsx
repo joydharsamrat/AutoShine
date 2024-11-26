@@ -47,7 +47,7 @@ const ServiceManagement = () => {
           <tbody>
             {isLoading
               ? Array.from({ length: 5 }).map((_, index) => (
-                  <tr key={index} className="border-b animate-pulse">
+                  <tr key={index} className="border-b animate-glow">
                     <td className="p-3">
                       <div className="h-4 bg-neutral-300 rounded w-3/4"></div>
                     </td>
