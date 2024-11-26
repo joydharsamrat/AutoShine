@@ -104,62 +104,64 @@ const SlotManagement = () => {
         </div>
       </div>
 
-      <div className="overflow-x-auto mt-5">
-        {isSlotsLoading ? (
+      <div className=" mt-5">
+        {isSlotsLoading || isServicesLoading ? (
           <Loader />
         ) : groupedSlots.length > 0 ? (
           groupedSlots.map(([date, slots]) => (
-            <div key={date} className="overflow-x-auto">
+            <div key={date}>
               <h3 className="text-xl font-semibold my-3 ">{date}</h3>
-              <table className="w-full border-collapse mb-4 bg-white shadow-md rounded-lg">
-                <thead>
-                  <tr className="bg-primary-700 text-white">
-                    <th className="p-3 text-left whitespace-nowrap min-w-[150px]">
-                      Time
-                    </th>
-                    <th className="p-3 text-left whitespace-nowrap min-w-[150px]">
-                      Status
-                    </th>
-                    <th className="p-3 text-left whitespace-nowrap min-w-[200px]">
-                      Action
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {slots.map((slot) => (
-                    <tr key={slot._id} className="border-b">
-                      <td className="p-3">{`${slot.startTime} - ${slot.endTime}`}</td>
-                      <td
-                        className={`p-3 font-semibold ${
-                          slot.isBooked === "booked"
-                            ? "text-primary-500"
-                            : slot.isBooked === "available"
-                            ? "text-green-600"
-                            : "text-secondary-500"
-                        }`}
-                      >
-                        {slot.isBooked}
-                      </td>
-                      <td className="p-3">
-                        {slot.isBooked !== "booked" && (
-                          <button
-                            onClick={() =>
-                              handleToggleSlotStatus(slot._id, slot.isBooked)
-                            }
-                            className={`${
-                              slot.isBooked === "available"
-                                ? "btn-secondary"
-                                : "btn-primary"
-                            }`}
-                          >
-                            Toggle Status
-                          </button>
-                        )}
-                      </td>
+              <div className="overflow-x-auto">
+                <table className="w-full border-collapse mb-4 bg-white shadow-md rounded-lg ">
+                  <thead>
+                    <tr className="bg-primary-700 text-white">
+                      <th className="p-3 text-left whitespace-nowrap min-w-[150px]">
+                        Time
+                      </th>
+                      <th className="p-3 text-left whitespace-nowrap min-w-[150px]">
+                        Status
+                      </th>
+                      <th className="p-3 text-left whitespace-nowrap min-w-[200px]">
+                        Action
+                      </th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {slots.map((slot) => (
+                      <tr key={slot._id} className="border-b">
+                        <td className="p-3">{`${slot.startTime} - ${slot.endTime}`}</td>
+                        <td
+                          className={`p-3 font-semibold ${
+                            slot.isBooked === "booked"
+                              ? "text-primary-500"
+                              : slot.isBooked === "available"
+                              ? "text-green-600"
+                              : "text-secondary-500"
+                          }`}
+                        >
+                          {slot.isBooked}
+                        </td>
+                        <td className="p-3">
+                          {slot.isBooked !== "booked" && (
+                            <button
+                              onClick={() =>
+                                handleToggleSlotStatus(slot._id, slot.isBooked)
+                              }
+                              className={`${
+                                slot.isBooked === "available"
+                                  ? "btn-secondary"
+                                  : "btn-primary"
+                              }`}
+                            >
+                              Toggle Status
+                            </button>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           ))
         ) : (

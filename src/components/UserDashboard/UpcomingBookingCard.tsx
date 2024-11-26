@@ -21,7 +21,7 @@ const UpcomingBookingCard = ({ booking }: { booking: TBooking }) => {
       </p>
 
       <div className="mt-3 text-xs text-gray-700 flex gap-2 items-center justify-between">
-        <p className="mb-1">
+        <p>
           <span>Date:</span> {booking.slot.date}
         </p>
         <p>

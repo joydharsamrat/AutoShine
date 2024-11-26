@@ -73,10 +73,7 @@ const UserDashboard = () => {
       </div>
 
       {/* Bookings Section */}
-      <div className="w-full lg:w-3/4 p-4 lg:p-6">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-          Your Bookings
-        </h2>
+      <div className="w-full lg:w-3/4 p-4 lg:p-6 max-w-7xl mx-auto">
         <UserBookings />
       </div>
 
