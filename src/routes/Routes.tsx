@@ -14,7 +14,6 @@ import SlotManagement from "../pages/Admin/SlotManagement";
 import ServiceManagement from "../pages/Admin/ServiceManagement";
 import Bookings from "../pages/Admin/Bookings";
 import UserRoute from "../components/Layouts/UserRoute";
-import UserDashboard from "../pages/User/UserDashboard";
 import SignUp from "../pages/Auth/SignUp";
 import Login from "../pages/Auth/Login";
 import ServicesPage from "../pages/Service/Services";
@@ -22,6 +21,9 @@ import ServiceDetailsPage from "../pages/Service/ServiceDetails";
 import Booking from "../pages/Service/Booking";
 import ForgetPass from "../pages/Auth/ForgetPassword";
 import ResetPass from "../pages/Auth/ResetPassword";
+import UserBookings from "../pages/User/UserBookings";
+import AuthRoute from "../components/Layouts/AuthRoute";
+import Profile from "../pages/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -93,11 +95,19 @@ export const router = createBrowserRouter([
         ],
       },
       {
-        path: "/user/dashboard",
+        path: "/user/booking",
         element: (
           <UserRoute>
-            <UserDashboard />
+            <UserBookings />
           </UserRoute>
+        ),
+      },
+      {
+        path: "/profile",
+        element: (
+          <AuthRoute>
+            <Profile />
+          </AuthRoute>
         ),
       },
     ],

@@ -4,8 +4,8 @@ import {
   DisclosureButton,
   DisclosurePanel,
 } from "@headlessui/react";
-import { FaBars, FaTimes } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
+import { FaBars, FaTimes, FaUserCircle } from "react-icons/fa";
+import { Link, NavLink } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/features/hooks";
 import { logout } from "../../redux/features/auth/authSlice";
 import { CountdownTimer } from "../UserDashboard/CountdownTimer";
@@ -64,10 +64,10 @@ export default function Navbar() {
                     )}
                     {auth.user?.role === "user" && (
                       <NavLink
-                        to="/user/dashboard"
+                        to="/user/booking"
                         className="text-white hover:bg-primary-500 px-3 py-2 rounded-md text-sm font-medium"
                       >
-                        Dashboard
+                        Bookings
                       </NavLink>
                     )}
 
@@ -85,7 +85,7 @@ export default function Navbar() {
                     </NavLink>
                   </div>
                 </div>
-                <div className="hidden md:block">
+                <div className="hidden md:block md:w-40">
                   {auth.user?.role === "user" &&
                     bookings.upcomingBookings[0] && (
                       <div>
@@ -100,12 +100,21 @@ export default function Navbar() {
                 </div>
                 <div>
                   {auth.token ? (
-                    <Button
-                      onClick={() => dispatch(logout())}
-                      className="btn-secondary"
-                    >
-                      Logout
-                    </Button>
+                    <div className="md:flex items-center gap-5">
+                      <Button
+                        onClick={() => dispatch(logout())}
+                        className="btn-secondary"
+                      >
+                        Logout
+                      </Button>
+                      <Link
+                        to="/profile"
+                        title="Profile"
+                        className="text-white text-2xl cursor-pointer"
+                      >
+                        <FaUserCircle />
+                      </Link>
+                    </div>
                   ) : (
                     <NavLink to="/login" className="btn-outline-neutral">
                       Login
@@ -145,10 +154,10 @@ export default function Navbar() {
               {auth.user?.role === "user" && (
                 <DisclosureButton
                   as={NavLink}
-                  to="/user/dashboard"
+                  to="/user/booking"
                   className="block text-white hover:bg-primary-500 px-3 py-2 rounded-md text-base font-medium"
                 >
-                  Dashboard
+                  Bookings
                 </DisclosureButton>
               )}
 

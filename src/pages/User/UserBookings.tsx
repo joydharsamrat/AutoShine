@@ -1,6 +1,6 @@
 import { useAppSelector } from "../../redux/features/hooks";
 import { TBooking } from "../../types";
-import UpcomingBookingCard from "./UpcomingBookingCard";
+import UpcomingBookingCard from "../../components/UserDashboard/UpcomingBookingCard";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 
 const UserBookings = () => {
@@ -9,7 +9,7 @@ const UserBookings = () => {
   );
 
   return (
-    <div className="p-4">
+    <div className="p-4 max-w-7xl mx-auto min-h-screen">
       <h2 className="text-2xl font-bold mb-6 text-center">My Bookings</h2>
       <TabGroup>
         <TabList className="flex justify-center mb-6">
@@ -41,7 +41,7 @@ const UserBookings = () => {
           {/* Upcoming Bookings Tab */}
           <TabPanel>
             {upcomingBookings.length ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {upcomingBookings.map((booking: TBooking) => (
                   <UpcomingBookingCard key={booking._id} booking={booking} />
                 ))}

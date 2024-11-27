@@ -17,7 +17,7 @@ const CountdownTimer = ({
           return <div className="text-green-600 font-semibold">Time's up!</div>;
         } else {
           return (
-            <div className="text-secondary-700 font-semibold bg-white p-1 rounded-md text-center">
+            <div className="text-white font-semibold text-center">
               {days ? `${days}d ` : ""}
               {hours || days ? `${hours}h ` : ""}
               {minutes || hours || days ? `${minutes}m ` : ""}

@@ -1,6 +1,6 @@
 /* Tailwind CSS @apply directive */
 .ourTeam {
-  @apply max-w-7xl mx-auto px-10 sm:px-5 mt-20;
+  @apply max-w-7xl mx-auto px-10 sm:px-5 my-20;
 }
 
 .swipeSlide {
@@ -28,14 +28,11 @@
   @apply p-2 text-center pointer-events-none;
 }
 .memberName {
-  @apply text-2xl font-bold mb-1;
+  @apply text-xl font-bold mb-1;
 }
 .memberPosition {
-  @apply text-lg mb-1;
+  @apply mb-1;
 }
 .memberDetails {
-  @apply text-xs;
-}
-.sliderPaginationContainer {
-  @apply mt-20 flex justify-center;
+  @apply text-[10px];
 }
