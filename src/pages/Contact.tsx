@@ -1,12 +1,8 @@
 import { FormEvent } from "react";
 import toast from "react-hot-toast";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
-import { useAppSelector } from "../redux/features/hooks";
-import { getCurrentUser } from "../redux/features/auth/authSlice";
 
 const Contact = () => {
-  const user = useAppSelector(getCurrentUser);
-
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     toast.success("Thank you for your message.");
