@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Dialog, DialogPanel } from "@headlessui/react";
 import { Dispatch, SetStateAction } from "react";
 import { TService } from "../../types";
