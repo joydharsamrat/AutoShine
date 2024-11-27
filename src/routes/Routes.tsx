@@ -25,11 +25,14 @@ import UserBookings from "../pages/User/UserBookings";
 import AuthRoute from "../components/Layouts/AuthRoute";
 import Profile from "../pages/Profile";
 import DashboardHome from "../pages/Admin/DashboardHome";
+import ErrorPage from "../pages/Error";
+import ChangePass from "../pages/Auth/ChangePassword";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -128,6 +131,14 @@ export const router = createBrowserRouter([
   {
     path: "/reset-password",
     element: <ResetPass />,
+  },
+  {
+    path: "/profile/change-password",
+    element: (
+      <AuthRoute>
+        <ChangePass />
+      </AuthRoute>
+    ),
   },
 
   {

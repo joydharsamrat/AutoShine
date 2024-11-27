@@ -9,7 +9,6 @@ import {
   Legend,
 } from "chart.js";
 import { useGetMonthlyRevenueQuery } from "../../../redux/features/dashboard/dashboard.api";
-import Loader from "../../Shared/Loaders/Loader";
 import { TMonthlyRevenue } from "../../../types";
 
 // Register the necessary chart components
@@ -26,7 +25,11 @@ const MonthlyRevenueChart = () => {
   const { data, isLoading } = useGetMonthlyRevenueQuery(undefined);
 
   if (isLoading) {
-    return <Loader />;
+    return (
+      <div className="animate-pulse p-4 bg-gray-200 rounded-md h-60 flex justify-center items-center">
+        <div className="bg-gray-300 w-3/4 h-8 rounded-md"></div>
+      </div>
+    );
   }
 
   const monthlyData: TMonthlyRevenue[] = data.data;

@@ -1,12 +1,15 @@
 import { useGetLatestBookingsQuery } from "../../../redux/features/dashboard/dashboard.api";
 import { TBooking } from "../../../types";
-import Loader from "../../Shared/Loaders/Loader";
 
 const LatestBookings = () => {
   const { data, isLoading } = useGetLatestBookingsQuery(undefined);
 
   if (isLoading) {
-    return <Loader />;
+    return (
+      <div className="animate-pulse p-4 bg-gray-200 rounded-md h-60 flex justify-center items-center mt-20">
+        <div className="bg-gray-300 w-3/4 h-8 rounded-md"></div>
+      </div>
+    );
   }
 
   const bookings = data?.data || [];

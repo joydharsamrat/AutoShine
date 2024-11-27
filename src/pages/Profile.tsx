@@ -5,6 +5,7 @@ import { useGetUserByIdQuery } from "../redux/features/user/user.api";
 import { getCurrentUser } from "../redux/features/auth/authSlice";
 import EditUserInfoModal from "../components/UserDashboard/EditUserInfoModal";
 import { FaRegEdit } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const user = useAppSelector(getCurrentUser);
@@ -53,6 +54,14 @@ const Profile = () => {
               {userLoading ? "Loading..." : userData?.data.address || "N/A"}
             </span>
           </div>
+        </div>
+        <div className="mt-12 flex justify-end">
+          <Link
+            to="/profile/change-password"
+            className="text-primary-700 text-sm underline"
+          >
+            Change Password
+          </Link>
         </div>
 
         <div
