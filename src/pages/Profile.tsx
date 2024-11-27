@@ -25,11 +25,11 @@ const Profile = () => {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeInOut" }}
-        className="w-full max-w-3xl bg-white shadow-lg rounded-lg p-6 lg:p-10 relative"
+        className="w-full max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-3xl bg-white shadow-lg rounded-lg p-6 lg:p-10 relative mx-auto"
       >
         {/* Header */}
         <div className="flex flex-col items-center text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-4xl font-bold text-gray-800 mb-4">
             {userLoading ? "Loading..." : userData?.data.name || "User Name"}
           </h2>
           <p className="text-gray-500 text-sm">
@@ -41,20 +41,22 @@ const Profile = () => {
         <div className="mt-8 space-y-6">
           <div className="flex items-center justify-between border-b pb-4">
             <span className="font-semibold text-gray-700">Phone:</span>
-            <span className="text-gray-900">
+            <span className="text-gray-900 text-end">
               {userLoading ? "Loading..." : userData?.data.phone || "N/A"}
             </span>
           </div>
-          <div className="flex items-center justify-between border-b pb-4">
+
+          {/* Address Field Fix */}
+          <div className="flex items-start justify-between border-b pb-4 gap-10">
             <span className="font-semibold text-gray-700">Address:</span>
-            <span className="text-gray-900 text-right">
+            <span className="text-gray-900 break-words  w-full text-end">
               {userLoading ? "Loading..." : userData?.data.address || "N/A"}
             </span>
           </div>
         </div>
 
         <div
-          className="absolute top-5 right-5 text-xl cursor-pointer"
+          className="absolute top-2 right-2 md:top-5 md:right-5 text-xl cursor-pointer"
           onClick={handleEditToggle}
         >
           <FaRegEdit />

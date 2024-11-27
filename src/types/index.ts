@@ -55,3 +55,11 @@ export interface TUser extends TUserAuth {
   name: string;
   phone: string;
 }
+export type TMonthlyRevenue = {
+  month: string;
+  totalRevenue: number;
+};
+export type TMonthlyBooking = {
+  month: string;
+  totalBookings: number;
+};

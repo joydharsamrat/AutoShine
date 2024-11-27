@@ -1,6 +1,6 @@
 import { baseApi } from "../../api/baseApi";
 
-const productApi = baseApi.injectEndpoints({
+const reviewApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     createReview: builder.mutation({
       query: (review) => ({
@@ -28,4 +28,4 @@ const productApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useCreateReviewMutation, useGetAllReviewsQuery } = productApi;
+export const { useCreateReviewMutation, useGetAllReviewsQuery } = reviewApi;

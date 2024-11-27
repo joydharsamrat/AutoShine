@@ -3,7 +3,7 @@ import { FaMailBulk } from "react-icons/fa";
 
 const Newsletter = () => {
   return (
-    <div className="mt-20 max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center gap-10">
+    <div className="my-20 max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center gap-10">
       <div className="w-full lg:w-2/5">
         <img
           src="https://i.ibb.co.com/gJVWbvL/Newsletter.webp"

@@ -24,6 +24,7 @@ import ResetPass from "../pages/Auth/ResetPassword";
 import UserBookings from "../pages/User/UserBookings";
 import AuthRoute from "../components/Layouts/AuthRoute";
 import Profile from "../pages/Profile";
+import DashboardHome from "../pages/Admin/DashboardHome";
 
 export const router = createBrowserRouter([
   {
@@ -78,7 +79,7 @@ export const router = createBrowserRouter([
           </AdminRoute>
         ),
         children: [
-          { index: true, element: <Bookings /> },
+          { index: true, element: <DashboardHome /> },
           { path: "bookings", element: <Bookings /> },
           {
             path: "services",

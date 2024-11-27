@@ -100,7 +100,7 @@ export default function Navbar() {
                 </div>
                 <div>
                   {auth.token ? (
-                    <div className="md:flex items-center gap-5">
+                    <div className="flex items-center md:gap-5">
                       <Button
                         onClick={() => dispatch(logout())}
                         className="btn-secondary"
@@ -110,7 +110,7 @@ export default function Navbar() {
                       <Link
                         to="/profile"
                         title="Profile"
-                        className="text-white text-2xl cursor-pointer"
+                        className="text-white text-2xl cursor-pointer hidden md:block"
                       >
                         <FaUserCircle />
                       </Link>
@@ -174,6 +174,15 @@ export default function Navbar() {
                 className="block text-white hover:bg-primary-500 px-3 py-2 rounded-md text-base font-medium"
               >
                 Contact
+              </DisclosureButton>
+
+              <DisclosureButton
+                as={NavLink}
+                to="/profile"
+                title="Profile"
+                className="block text-white hover:bg-primary-500 px-3 py-2 rounded-md text-base font-medium"
+              >
+                Profile
               </DisclosureButton>
 
               <div>

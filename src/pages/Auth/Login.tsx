@@ -36,6 +36,38 @@ const Login = () => {
     }
   };
 
+  const loginUsingCredentials = async (credentials: {
+    email: string;
+    password: string;
+  }) => {
+    const loadingToast = toast.loading("Logging In...");
+
+    try {
+      const res = await userLogin(credentials).unwrap();
+      const user = jwtDecode(res.token);
+      dispatch(setUser({ user, token: res.token }));
+      toast.success("Login successful!", { id: loadingToast });
+      navigate("/");
+    } catch (error: any) {
+      console.log(error);
+      toast.error(
+        `${error?.data?.message}` || "Login failed! Please try again",
+        {
+          id: loadingToast,
+        }
+      );
+    }
+  };
+
+  const adminCredentials = {
+    email: "joydharsamrat@gmail.com",
+    password: "52615261",
+  };
+  const userCredentials = {
+    email: "joydharsamrat1@gmail.com",
+    password: "52615261",
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-primary-700 to-secondary-700 p-5">
       <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full animate__animated animate__fadeIn">
@@ -108,6 +140,21 @@ const Login = () => {
             </Link>
           </p>
         </motion.div>
+        <hr className="my-5" />
+        <div className="flex justify-between items-center text-sm">
+          <button
+            onClick={() => loginUsingCredentials(adminCredentials)}
+            className="text-primary-700 underline"
+          >
+            Login As Admin
+          </button>
+          <button
+            onClick={() => loginUsingCredentials(userCredentials)}
+            className="text-primary-700 underline"
+          >
+            Login As User
+          </button>
+        </div>
       </div>
     </div>
   );
