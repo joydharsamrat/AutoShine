@@ -8,16 +8,22 @@ import { useChangePassMutation } from "../../redux/features/auth/authApi";
 import Form from "../../components/form/Form";
 import PasswordFields from "../../components/form/PasswordFields";
 import InputField from "../../components/form/InputField";
+import { jwtDecode } from "jwt-decode";
+import { useAppDispatch } from "../../redux/features/hooks";
+import { setUser } from "../../redux/features/auth/authSlice";
 
 const ChangePass = () => {
   const navigate = useNavigate();
   const [changePassword] = useChangePassMutation();
+  const dispatch = useAppDispatch();
 
   const onSubmit = async (data: FieldValues) => {
     const loadingToast = toast.loading("loading...");
 
     try {
-      await changePassword(data).unwrap();
+      const res = await changePassword(data).unwrap();
+      const user = jwtDecode(res.token);
+      dispatch(setUser({ user, token: res.token }));
       toast.success("Password changed !", { id: loadingToast });
       navigate("/profile");
     } catch (error: any) {
