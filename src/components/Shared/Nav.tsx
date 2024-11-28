@@ -85,9 +85,9 @@ export default function Navbar() {
                     </NavLink>
                   </div>
                 </div>
-                <div className="hidden md:block md:w-40">
-                  {auth.user?.role === "user" &&
-                    bookings.upcomingBookings[0] && (
+                {auth.user?.role === "user" && (
+                  <div className="hidden md:block md:w-40">
+                    {bookings.upcomingBookings[0] && (
                       <div>
                         <CountdownTimer
                           targetDate={bookings.upcomingBookings[0].slot.date}
@@ -97,7 +97,8 @@ export default function Navbar() {
                         />
                       </div>
                     )}
-                </div>
+                  </div>
+                )}
                 <div>
                   {auth.token ? (
                     <div className="flex items-center md:gap-5">
