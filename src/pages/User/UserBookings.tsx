@@ -69,6 +69,9 @@ const UserBookings = () => {
                       <th className="p-3 text-left whitespace-nowrap min-w-[150px]">
                         Time
                       </th>
+                      <th className="p-3 text-left whitespace-nowrap min-w-[150px]">
+                        Price
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -78,6 +81,9 @@ const UserBookings = () => {
                         <td className="border-b p-3">{booking.slot.date}</td>
                         <td className="border-b p-3">
                           {booking.slot.startTime}-{booking.slot.endTime}
+                        </td>
+                        <td className="border-b p-3">
+                          ${booking.service.price}
                         </td>
                       </tr>
                     ))}
