@@ -107,11 +107,11 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/profile",
+        path: "/user/profile",
         element: (
-          <AuthRoute>
+          <UserRoute>
             <Profile />
-          </AuthRoute>
+          </UserRoute>
         ),
       },
     ],

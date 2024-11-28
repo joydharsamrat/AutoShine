@@ -107,13 +107,15 @@ export default function Navbar() {
                       >
                         Logout
                       </Button>
-                      <Link
-                        to="/profile"
-                        title="Profile"
-                        className="text-white text-2xl cursor-pointer hidden md:block"
-                      >
-                        <FaUserCircle />
-                      </Link>
+                      {auth.user?.role === "user" && (
+                        <Link
+                          to="/user/profile"
+                          title="Profile"
+                          className="text-white text-2xl cursor-pointer hidden md:block"
+                        >
+                          <FaUserCircle />
+                        </Link>
+                      )}
                     </div>
                   ) : (
                     <NavLink to="/login" className="btn-outline-neutral">
@@ -176,14 +178,16 @@ export default function Navbar() {
                 Contact
               </DisclosureButton>
 
-              <DisclosureButton
-                as={NavLink}
-                to="/profile"
-                title="Profile"
-                className="block text-white hover:bg-primary-500 px-3 py-2 rounded-md text-base font-medium"
-              >
-                Profile
-              </DisclosureButton>
+              {auth.user?.role === "user" && (
+                <DisclosureButton
+                  as={NavLink}
+                  to="/user/profile"
+                  title="Profile"
+                  className="block text-white hover:bg-primary-500 px-3 py-2 rounded-md text-base font-medium"
+                >
+                  Profile
+                </DisclosureButton>
+              )}
 
               <div>
                 {auth.user?.role === "user" && bookings.upcomingBookings[0] && (
