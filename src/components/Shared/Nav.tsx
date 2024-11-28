@@ -85,18 +85,14 @@ export default function Navbar() {
                     </NavLink>
                   </div>
                 </div>
-                {auth.user?.role === "user" && (
+                {auth.user?.role === "user" && bookings.upcomingBookings[0] && (
                   <div className="hidden md:block md:w-40">
-                    {bookings.upcomingBookings[0] && (
-                      <div>
-                        <CountdownTimer
-                          targetDate={bookings.upcomingBookings[0].slot.date}
-                          targetTime={
-                            bookings.upcomingBookings[0].slot.startTime
-                          }
-                        />
-                      </div>
-                    )}
+                    <div>
+                      <CountdownTimer
+                        targetDate={bookings.upcomingBookings[0].slot.date}
+                        targetTime={bookings.upcomingBookings[0].slot.startTime}
+                      />
+                    </div>
                   </div>
                 )}
                 <div>
