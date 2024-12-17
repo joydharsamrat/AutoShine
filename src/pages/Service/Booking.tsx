@@ -42,9 +42,12 @@ const Booking = () => {
     };
     console.log(paymentData);
     try {
-      await bookSlot(bookingPayload).unwrap();
+      const bookingRes = await bookSlot(bookingPayload).unwrap();
 
-      const res = await initiatePayment(paymentData).unwrap();
+      const res = await initiatePayment({
+        ...paymentData,
+        bookingId: bookingRes.data._id,
+      }).unwrap();
 
       if (res.data.result === "true") {
         window.location.href = res.data.payment_url;

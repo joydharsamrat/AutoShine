@@ -1,7 +1,39 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { FormEvent } from "react";
 import toast from "react-hot-toast";
 import { FaMailBulk } from "react-icons/fa";
+import { useSubscribeToNewsletterMutation } from "../../redux/features/newsletter/newsletter.api";
 
 const Newsletter = () => {
+  const [subscribe] = useSubscribeToNewsletterMutation();
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+
+    const loadingToast = toast.loading("Loading...");
+    try {
+      const email = (e.target as HTMLFormElement)?.email?.value;
+      const res = await subscribe({ email }).unwrap();
+      if (res.success) {
+        toast.success("Subscribed successfully!", { id: loadingToast });
+        (e.target as HTMLFormElement).reset();
+      } else {
+        throw new Error(
+          res?.message || "Something went wrong. Please try again."
+        );
+      }
+    } catch (error: any) {
+      toast.error(
+        error.message ||
+          error?.data?.message ||
+          "Subscription. Please try again.",
+        {
+          id: loadingToast,
+        }
+      );
+      console.log(error);
+    }
+  };
   return (
     <div className="my-20 max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center gap-10">
       <div className="w-full lg:w-2/5">
@@ -26,15 +58,7 @@ const Newsletter = () => {
           tips! Join our newsletter today.
         </p>
         <div>
-          <form
-            className="flex items-center"
-            onSubmit={(e) => {
-              e.preventDefault();
-              toast.success("Thank you.");
-              const form = e.target as HTMLFormElement;
-              form.reset();
-            }}
-          >
+          <form className="flex items-center" onSubmit={handleSubmit}>
             <input
               required
               name="email"

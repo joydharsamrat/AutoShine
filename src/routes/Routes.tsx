@@ -27,6 +27,7 @@ import Profile from "../pages/Profile";
 import DashboardHome from "../pages/Admin/DashboardHome";
 import ErrorPage from "../pages/Error";
 import ChangePass from "../pages/Auth/ChangePassword";
+import Unsubscribe from "../pages/Newsletter/Unsubscribe";
 
 export const router = createBrowserRouter([
   {
@@ -73,6 +74,10 @@ export const router = createBrowserRouter([
       {
         path: "/reviews",
         element: <Review />,
+      },
+      {
+        path: "/newsletter/unsubscribe",
+        element: <Unsubscribe />,
       },
       {
         path: "/admin/dashboard",
