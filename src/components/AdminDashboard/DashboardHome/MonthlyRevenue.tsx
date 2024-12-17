@@ -62,7 +62,7 @@ const MonthlyRevenueChart = () => {
   };
 
   return (
-    <div className="bg-white p-2 rounded-xl shadow-xl">
+    <div className="bg-white p-2 rounded-xl shadow">
       <Bar data={chartData} options={chartOptions} />
     </div>
   );

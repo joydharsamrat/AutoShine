@@ -15,7 +15,7 @@ const LatestBookings = () => {
   const bookings = data?.data || [];
 
   return (
-    <div className="bg-white mt-12 p-4 rounded-xl">
+    <div className="bg-white mt-12 p-4 rounded-xl shadow">
       <h3 className="text-xl font-semibold text-center mb-5">
         Latest Bookings
       </h3>

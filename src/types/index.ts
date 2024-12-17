@@ -63,3 +63,16 @@ export type TMonthlyBooking = {
   month: string;
   totalBookings: number;
 };
+
+export type TSubscriber = {
+  _id: string;
+  email: string;
+  status: string;
+};
+
+export type TStats = {
+  activeServices: number;
+  totalBookings: number;
+  totalRevenue: number;
+  upcomingBookings: number;
+};

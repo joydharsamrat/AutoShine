@@ -90,24 +90,26 @@ const UserManagement = () => {
                         {user.role}
                       </td>
                       <td className="border-b p-2 flex space-x-2 text-sm sm:text-base min-w-[300px]">
-                        <button
-                          disabled={user.role === "admin"}
-                          onClick={() => handleViewBookings(user)}
-                          className={`${
-                            user.role === "user"
-                              ? "btn-primary"
-                              : "btn-neutral "
-                          } `}
-                        >
-                          View Bookings
-                        </button>
-                        {user.role === "user" && (
-                          <button
-                            onClick={() => handleMakeAdmin(user._id)}
-                            className="btn-secondary"
-                          >
-                            Make Admin
-                          </button>
+                        {user.role === "user" ? (
+                          <>
+                            <button
+                              onClick={() => handleViewBookings(user)}
+                              className="btn-primary"
+                            >
+                              View Bookings
+                            </button>
+
+                            <button
+                              onClick={() => handleMakeAdmin(user._id)}
+                              className="btn-secondary"
+                            >
+                              Make Admin
+                            </button>
+                          </>
+                        ) : (
+                          <span className="text-gray-500 italic">
+                            No actions available
+                          </span>
                         )}
                       </td>
                     </tr>

@@ -28,6 +28,7 @@ import DashboardHome from "../pages/Admin/DashboardHome";
 import ErrorPage from "../pages/Error";
 import ChangePass from "../pages/Auth/ChangePassword";
 import Unsubscribe from "../pages/Newsletter/Unsubscribe";
+import SubscribersManagement from "../pages/Admin/Newsletter/SubscribersManagement";
 
 export const router = createBrowserRouter([
   {
@@ -79,30 +80,7 @@ export const router = createBrowserRouter([
         path: "/newsletter/unsubscribe",
         element: <Unsubscribe />,
       },
-      {
-        path: "/admin/dashboard",
-        element: (
-          <AdminRoute>
-            <AdminDashboard />
-          </AdminRoute>
-        ),
-        children: [
-          { index: true, element: <DashboardHome /> },
-          { path: "bookings", element: <Bookings /> },
-          {
-            path: "services",
-            element: <ServiceManagement />,
-          },
-          {
-            path: "slots",
-            element: <SlotManagement />,
-          },
-          {
-            path: "users",
-            element: <UserManagement />,
-          },
-        ],
-      },
+
       {
         path: "/user/booking",
         element: (
@@ -118,6 +96,34 @@ export const router = createBrowserRouter([
             <Profile />
           </UserRoute>
         ),
+      },
+    ],
+  },
+  {
+    path: "/admin/dashboard",
+    element: (
+      <AdminRoute>
+        <AdminDashboard />
+      </AdminRoute>
+    ),
+    children: [
+      { index: true, element: <DashboardHome /> },
+      { path: "bookings", element: <Bookings /> },
+      {
+        path: "services",
+        element: <ServiceManagement />,
+      },
+      {
+        path: "slots",
+        element: <SlotManagement />,
+      },
+      {
+        path: "users",
+        element: <UserManagement />,
+      },
+      {
+        path: "newsletter/subscribers",
+        element: <SubscribersManagement />,
       },
     ],
   },

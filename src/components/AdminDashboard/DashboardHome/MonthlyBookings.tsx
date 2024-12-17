@@ -69,7 +69,7 @@ const MonthlyBookingsChart = () => {
   };
 
   return (
-    <div className="bg-white p-2 rounded-xl shadow-xl">
+    <div className="bg-white p-2 rounded-xl shadow">
       <Line data={chartData} options={chartOptions} />
     </div>
   );

@@ -56,6 +56,14 @@ const dashboardApi = baseApi.injectEndpoints({
         };
       },
     }),
+    getStats: builder.query({
+      query: () => {
+        return {
+          url: `/stats/stats`,
+          method: "GET",
+        };
+      },
+    }),
   }),
 });
 
@@ -63,4 +71,5 @@ export const {
   useGetMonthlyRevenueQuery,
   useGetMonthlyBookingsQuery,
   useGetLatestBookingsQuery,
+  useGetStatsQuery,
 } = dashboardApi;
